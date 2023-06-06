@@ -7,6 +7,8 @@ const TinderCards = () => {
   const [people, setPeople] = useState([
     {
       name: 'Beyonce Knowles',
+      gender: 'woman',
+      preferred_gender: 'women',
       url: 'https://www.travelnews.se/wp-content/uploads/2023/02/643px-Beyonce_Black_Is_King_Still.png'
     },
     {
