@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 import { React, useState } from 'react'
-import { useCookies } from 'react-cookie'
+import { useCookies } from 'react-cookie' // install by running npm install react-cookie
 import Nav from '../components/Nav'
 import AuthModal from '../components/AuthModal'
 

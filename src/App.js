@@ -1,21 +1,29 @@
 /* eslint-disable react/jsx-no-undef */
 import React from 'react'
-import Header from 'components/Header'
+/* import Header from 'components/Header' */
+import { useCookies } from 'react-cookie'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import TinderCards from './components/TinderCards/TinderCards';
-import Home from './pages/Home';
-import Registration from './pages/Registration'
-import './index.css'
+import Home from './pages/Home'
+/* import Dashboard from './pages/Dashboard' */
+/* import OnBoarding from './pages/OnBoarding' */
 
-export const App = () => {
+const App = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
+
+  const authToken = cookies.AuthToken
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/header" element={<Header />} />
-        <Route path="/registration" element={<Registration />} /> {/* Add this route for Registration */}
+        {authToken && <Route path="/dashboard" element={<Dashboard />} />}
+        {authToken && <Route path="/onboarding" element={<OnBoarding />} />}
         <Route path="/tinder-cards" element={<TinderCards />} />
       </Routes>
     </BrowserRouter>
   )
 }
+
+export default App
+

@@ -1,5 +1,10 @@
-import { React, useState } from 'react'
-import axios from 'axios'
+/* eslint-disable no-shadow */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable max-len */
+/* eslint-disable react/react-in-jsx-scope */
+import { useState } from 'react'
+import axios from 'axios' // install axios by running `npm i axios` in the terminal
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 
@@ -8,7 +13,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   const [password, setPassword] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState(null)
   const [error, setError] = useState(null)
-  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const [cookies, setCookie, removeCookie] = useCookies(null) // install react-cookie by running `npm i react-cookie` in the terminal
 
   const navigate = useNavigate()
 
