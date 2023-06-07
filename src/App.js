@@ -6,7 +6,8 @@ import { useCookies } from 'react-cookie'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import user from 'reducers/User';
+import user from './reducers/User';
+import { ProfilePage } from './components/Profile';
 // eslint-disable-next-line import/no-named-as-default
 
 /* import OnBoarding from './pages/OnBoarding'; */
@@ -32,6 +33,7 @@ const App = () => {
           {authToken && <Route path="/dashboard" element={<Dashboard />} />}
           {/* {authToken && <Route path="/onboarding" element={<OnBoarding />} />} */}
           <Route path="/tinder-cards" element={<TinderCards />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </BrowserRouter>
     </Provider>

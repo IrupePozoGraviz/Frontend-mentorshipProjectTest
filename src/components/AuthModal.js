@@ -4,11 +4,11 @@
 /* eslint-disable max-len */
 /* eslint-disable react/react-in-jsx-scope */
 import { useState, useEffect } from 'react'
-// import axios from 'axios' // install axios by running `npm i axios` in the terminal
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-/* import { useCookies } from 'react-cookie' */
 import user from '../reducers/User'
+/* import { useCookies } from 'react-cookie' */
+
 import { API_URL } from './Utils'
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
@@ -29,7 +29,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   }
   useEffect(() => {
     if (accessToken) {
-      navigate('/dashboard');
+      navigate('/profile');
     }
   }, [accessToken, navigate]);
 
