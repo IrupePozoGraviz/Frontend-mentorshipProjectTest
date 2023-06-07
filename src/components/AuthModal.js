@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 /* import { useCookies } from 'react-cookie' */
-import user from '../reducers/User'
+import user from '../reducers/user'
 import { API_URL } from './Utils'
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
@@ -29,7 +29,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   }
   useEffect(() => {
     if (accessToken) {
-      navigate('/dashboard');
+      navigate('/profile');
     }
   }, [accessToken, navigate]);
 
