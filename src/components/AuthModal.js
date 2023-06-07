@@ -4,10 +4,8 @@
 /* eslint-disable max-len */
 /* eslint-disable react/react-in-jsx-scope */
 import { useState, useEffect } from 'react'
-// import axios from 'axios' // install axios by running `npm i axios` in the terminal
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-/* import { useCookies } from 'react-cookie' */
 import user from '../reducers/user'
 import { API_URL } from './Utils'
 
