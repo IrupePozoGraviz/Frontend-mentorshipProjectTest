@@ -31,7 +31,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           {authToken && <Route path="/dashboard" element={<Dashboard />} />}
-          {/* {authToken && <Route path="/onboarding" element={<OnBoarding />} />} */}
+          {/* {authToken && <Route path="/onboarding" element={<Register />} />} */}
           <Route path="/tinder-cards" element={<TinderCards />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>

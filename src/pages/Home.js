@@ -30,7 +30,7 @@ const Home = () => {
         showModal={showModal}
         setIsSignUp={setIsSignUp} />
       <div className="home">
-        <h1 className="primary-title">Swipe Right®</h1>
+        <h1 className="primary-title">Mentor</h1>
         <button
           type="button"
           className="primary-button"

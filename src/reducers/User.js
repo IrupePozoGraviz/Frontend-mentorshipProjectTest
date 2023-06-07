@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'; // install @reduxjs/toolkit by r
 const user = createSlice({
   name: 'user',
   initialState: {
-    firstname: null, // Add firstname field
+    firstName: null, // Add firstname field
     username: null,
     userId: null,
     email: null, // Add email field
