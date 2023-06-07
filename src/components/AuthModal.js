@@ -3,30 +3,65 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable max-len */
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react'
-import axios from 'axios' // install axios by running `npm i axios` in the terminal
+import { useState, useEffect } from 'react'
+// import axios from 'axios' // install axios by running `npm i axios` in the terminal
 import { useNavigate } from 'react-router-dom'
-import { useCookies } from 'react-cookie'
+import { useDispatch, useSelector } from 'react-redux'
+/* import { useCookies } from 'react-cookie' */
+import user from '../reducers/User'
+import { API_URL } from './Utils'
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
-  const [email, setEmail] = useState(null)
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState(null)
-  const [error, setError] = useState(null)
-  const [setCookie] = useCookies(null) // install react-cookie by running `npm i react-cookie` in the terminal
+  // const [setCookie] = useCookies(null) // install react-cookie by running `npm i react-cookie` in the terminal
+  const login = 'login'; // this is the slug for the login endpoint
+  const dispatch = useDispatch(); // install react-redux by running `npm i react-redux` in the terminal
+  const navigate = useNavigate();
+  const accessToken = useSelector((store) => store.user.accessToken);
 
-  const navigate = useNavigate()
-
-  console.log(email, password, confirmPassword)
+  console.log(username, password, confirmPassword)
+  // setCookie('UserId', response.data.userId)
 
   const handleClick = () => {
     setShowModal(false)
   }
+  useEffect(() => {
+    if (accessToken) {
+      navigate('/dashboard');
+    }
+  }, [accessToken, navigate]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = (event) => {
+    event.preventDefault()
 
-    try {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    };
+    fetch(API_URL(login), options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Login Data:', data)
+        if (data.success) {
+          dispatch(user.actions.setAccessToken(data.response.accessToken));
+          dispatch(user.actions.setUsername(data.response.username));
+          dispatch(user.actions.setUserId(data.response.id));
+          console.log(user.actions.setUserId(data.response.id));
+          dispatch(user.actions.setError(null));
+        } else {
+          dispatch(user.actions.setAccessToken(null));
+          dispatch(user.actions.setUsername(null));
+          dispatch(user.actions.setUserId(null));
+          dispatch(user.actions.setError(data.response));
+        }
+      });
+  };
+    /* try {
       if (isSignUp && (password !== confirmPassword)) {
         setError('Passwords need to match!')
         return
@@ -45,7 +80,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
     } catch (error) {
       console.log(error)
     }
-  }
+  } */
 
   return (
     <div className="auth-modal">
@@ -55,12 +90,12 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       <p>By clicking Log In, you agree to our terms. Learn how we process your data in our Privacy Policy and Cookie Policy.</p>
       <form onSubmit={handleSubmit}>
         <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="email"
+          type="text"
+          id="Username"
+          name="Username"
+          placeholder="username"
           required
-          onChange={(e) => setEmail(e.target.value)} />
+          onChange={(e) => setUsername(e.target.value)} />
         <input
           type="password"
           id="password"
@@ -76,7 +111,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
           required
           onChange={(e) => setConfirmPassword(e.target.value)} />}
         <input className="secondary-button" type="submit" />
-        <p>{error}</p>
+
       </form>
 
       <hr />
@@ -86,3 +121,24 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   )
 }
 export default AuthModal
+
+/*
+
+<h1>Log in</h1>
+      <form onSubmit={onFormSubmit}>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)} />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+*/
