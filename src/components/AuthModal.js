@@ -13,7 +13,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   const [password, setPassword] = useState(null)
   const [confirmPassword, setConfirmPassword] = useState(null)
   const [error, setError] = useState(null)
-  const [cookies, setCookie, removeCookie] = useCookies(null) // install react-cookie by running `npm i react-cookie` in the terminal
+  const [setCookie] = useCookies(null) // install react-cookie by running `npm i react-cookie` in the terminal
 
   const navigate = useNavigate()
 

@@ -7,13 +7,13 @@ import AuthModal from '../components/AuthModal'
 const Home = () => {
   const [showModal, setShowModal] = useState(false)
   const [isSignUp, setIsSignUp] = useState(true)
-  const [cookies, setCookie, removeCookie] = useCookies(['user'])
+  const [cookies] = useCookies(['user'])
   const authToken = cookies.AuthToken
 
   const handleClick = () => {
     if (authToken) {
-      removeCookie('UserId', cookies.UserId)
-      removeCookie('AuthToken', cookies.AuthToken)
+      // removeCookie('UserId', cookies.UserId)
+      // removeCookie('AuthToken', cookies.AuthToken)
       window.location.reload()
       return
     }
