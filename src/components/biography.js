@@ -1,62 +1,77 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { API_URL } from './Utils';
-import user from '../reducers/user';
-import thoughts from '../reducers/bio';
 
-const Main = () => {
-  const thoughtItems = useSelector((store) => store.thoughts.items);
-  const dispatch = useDispatch();
+const BioEditor = () => {
+  const [bio, setBio] = useState('');
   const accessToken = useSelector((store) => store.user.accessToken);
-  const username = useSelector((store) => store.user.username);
-  const navigate = useNavigate();
+  // const userId = useSelector((store) => store.user.userId);
+
   useEffect(() => {
-    if (!accessToken) {
-      navigate('/login')
-    }
+    const fetchBio = async () => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: accessToken
+          }
+        };
+        const response = await fetch(API_URL('bio'), options);
+        const data = await response.json();
+
+        if (data.success) {
+          setBio(data.bio);
+        }
+      } catch (error) {
+        console.error('An error occurred while fetching bio:', error);
+      }
+    };
+
+    fetchBio();
   }, [accessToken]);
 
-  useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: accessToken
+  const handleChange = (e) => {
+    setBio(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify({ bio })
+      };
+      const response = await fetch(API_URL('bio'), options);
+      const data = await response.json();
+
+      if (data.success) {
+        console.log('Bio saved:', bio);
+      } else {
+        console.error('Failed to save bio:', data.error);
       }
+    } catch (error) {
+      console.error('An error occurred while saving bio:', error);
     }
-    fetch(API_URL('bio'), options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          dispatch(thoughts.actions.setError(null));
-          dispatch(thoughts.actions.setItems(data.response));
-        } else {
-          dispatch(thoughts.actions.setError(data.message));
-          dispatch(thoughts.actions.setItems([]));
-        }
-      });
-  })
+  };
 
-  const onLogoutButtonClick = () => {
-    dispatch(user.actions.setAccessToken(null));
-    dispatch(user.actions.setUsername(null));
-    dispatch(user.actions.setUserId(null));
-    dispatch(user.actions.setError(null));
-    dispatch(thoughts.actions.setItems([]));
-  }
   return (
-    <>
-      <button type="button" onClick={onLogoutButtonClick}>LOGOUT</button>
-      {username ? (<h2>THESE ARE THE THOUGHTS OF {username.toUpperCase()}</h2>) : ''}
-      {thoughtItems.map((item) => {
-        return (<p key={item._id}>{item.message}</p>)
-      })}
-    </>
+    <div className="bio-editor">
+      <h2>Bio</h2>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={bio}
+          onChange={handleChange}
+          placeholder="Write something about yourself..." />
+        <button type="submit">Save</button>
+      </form>
+    </div>
   );
-}
+};
 
-export default Main;
+export default BioEditor;

@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import io from 'socket.io-client';
 import { setUsername, setEmail, setRole, setPreferences, setError, setFirstname } from '../reducers/user';
 import { API_URL } from './Utils';
+import BioEditor from './biography';
+import { Picture } from './profilePic';
 
 const socket = io();
 
@@ -78,15 +80,45 @@ export const ProfilePage = () => {
     }
   };
   const userProfile = useSelector((store) => store.user);
+  const handlePictureUpload = async (event) => {
+    try {
+      const file = event.target.files[0];
+      const formData = new FormData();
+      formData.append('profilePicture', file);
+
+      const response = await fetch(
+        API_URL(`/user/${userId}/upload-profile-picture`),
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          },
+          body: formData
+        }
+      );
+
+      if (response.ok) {
+        console.log('Profile picture uploaded successfully');
+        // You can optionally update the profile picture state here if needed
+      } else {
+        console.log('Failed to upload profile picture:', response.status);
+      }
+    } catch (error) {
+      console.log('Error uploading profile picture:', error);
+    }
+  };
 
   return (
     <main className="profile-container">
       {loading ? <div>Loading...</div> : null}
       {userProfile && (
         <div key={userId} className="box-container">
-
           <div className="profile-header">
-            <img src={userProfile.profilePicture} alt="profile" className="profile-picture" />
+            {/* ... */}
+            <Picture userId={userId} onPictureUpload={handlePictureUpload} />
+          </div>
+          <div className="profile-header">
+
             <h1>{`${userProfile.username}'s Profile`}</h1>
           </div>
 
@@ -97,9 +129,7 @@ export const ProfilePage = () => {
             <p>{`preferences: ${userProfile.preferences}`}</p>
           </div>
           <section className="bio-section">
-            <h2>Bio</h2>
-            <p>Here you will see your bio that you can delete and change</p>
-
+            <BioEditor />
           </section>
           <section className="matches-section">
             <h2>Matches</h2>
