@@ -1,4 +1,4 @@
-import Nav from '../components/Nav'
+/* import Nav from '../components/Nav'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
@@ -208,7 +208,6 @@ const OnBoarding = () => {
                             {formData.url && <img src={formData.url} alt="profile pic preview" />}
                         </div>
 
-
                     </section>
 
                 </form>
@@ -216,4 +215,4 @@ const OnBoarding = () => {
         </>
     )
 }
-export default OnBoarding
+export default OnBoarding */

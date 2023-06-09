@@ -314,3 +314,49 @@ nav .logo-container .logo {
   display: flex;
   flex-direction: column;
 }
+
+/*-------- Profile Container --------*/
+
+.profile-container {
+  background-color:  rgb(235, 235, 235);
+ 
+}
+
+.profile-header {
+  background: linear-gradient(45deg, rgb(254, 48, 114), rgb(255, 89, 64));
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+.profile-header img{
+  border: solid 5px black;
+  width: 200px;
+  height: 200px;
+}
+.profile-header h1{
+  color: white;
+  font-size: 40px;
+  margin: 0;
+  padding: 20px;
+}
+.box-container{
+  background-color: rgb(255, 255, 255);
+}
+.profile-info{
+  background: linear-gradient(to bottom, rgb(247, 244, 244) 0%, 
+  rgb(220, 219, 219) 100%);
+ 
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 20px;
+}
+.matches-section{
+  background: linear-gradient(45deg, rgb(254, 48, 114), rgb(255, 89, 64));
+  
+}
+.chat-section{
+  background: linear-gradient(to bottom, rgb(247, 244, 244) 0%, 
+  rgb(220, 219, 219) 100%);
+  
+}

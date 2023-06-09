@@ -13,7 +13,7 @@ import { RegistrationPage } from './Registration'
 const AuthModal = ({ setShowModal, isSignUp }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState(null)
-  const [confirmPassword, setConfirmPassword] = useState(null)
+  const [confirmPassword] = useState(null)
   const login = 'login'; // this is the slug for the login endpoint
   const dispatch = useDispatch(); // install react-redux by running `npm i react-redux` in the terminal
   const navigate = useNavigate();
