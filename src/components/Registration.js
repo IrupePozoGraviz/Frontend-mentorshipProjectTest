@@ -110,12 +110,22 @@ export const RegistrationPage = () => {
           <label htmlFor="email" />
         </div>
         <div>
-          <label htmlFor="firstName">First Name:</label>
-          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          <input
+            type="text"
+            value={firstName}
+            placeholder="First Name"
+            required
+            onChange={(e) => setFirstName(e.target.value)} />
+          <label htmlFor="firstName" />
         </div>
         <div>
-          <label htmlFor="lastName">Last Name:</label>
-          <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+          <input
+            type="text"
+            placeholder="Last Name"
+            required
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)} />
+          <label htmlFor="lastName" />
         </div>
         <div>
           <label>Role:</label>
