@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import user from '../reducers/user'
 import { API_URL } from './Utils'
+import { RegistrationPage } from './registration'
 
 const AuthModal = ({ setShowModal, isSignUp }) => {
   const [username, setUsername] = useState('');
@@ -31,8 +32,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   }, [accessToken, navigate]);
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-
+    event.preventDefault();
     const options = {
       method: 'POST',
       headers: {
@@ -43,17 +43,10 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
     fetch(API_URL(login), options)
       .then((response) => response.json())
       .then((data) => {
-        console.log('Login Data:', data)
+        console.log('Login Data:', data);
         if (data.success) {
-          dispatch(user.actions.setAccessToken(data.response.accessToken));
-          dispatch(user.actions.setUsername(data.response.username));
-          dispatch(user.actions.setUserId(data.response.id));
-          console.log(user.actions.setUserId(data.response.id));
           dispatch(user.actions.setError(null));
         } else {
-          dispatch(user.actions.setAccessToken(null));
-          dispatch(user.actions.setUsername(null));
-          dispatch(user.actions.setUserId(null));
           dispatch(user.actions.setError(data.response));
         }
       });
@@ -90,6 +83,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         <input className="secondary-button" type="submit" />
 
       </form>
+      <RegistrationPage navigate={navigate} />
 
       <hr />
       <h2>GET THE APP</h2>

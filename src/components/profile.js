@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import io from 'socket.io-client';
 import { setUsername, setEmail, setRole, setPreferences, setError, setFirstname } from '../reducers/user';
 import { API_URL } from './Utils';
-import { Biography } from './biography';
 
 const socket = io();
 
@@ -100,7 +99,7 @@ export const ProfilePage = () => {
           <section className="bio-section">
             <h2>Bio</h2>
             <p>Here you will see your bio that you can delete and change</p>
-            <Biography />
+
           </section>
           <section className="matches-section">
             <h2>Matches</h2>

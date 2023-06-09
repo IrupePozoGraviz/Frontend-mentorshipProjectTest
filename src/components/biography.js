@@ -1,17 +1,24 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { API_URL } from './Utils';
-import { bio } from '../reducers/bio';
+import user from '../reducers/user';
+import thoughts from '../reducers/bio';
 
-export const Biography = () => {
-  const [message, setMessage] = useState('');
-  const [isLoading, setLoading] = useState(false);
-  const bioItems = useSelector((store) => store.bio.items);
+const Main = () => {
+  const thoughtItems = useSelector((store) => store.thoughts.items);
   const dispatch = useDispatch();
   const accessToken = useSelector((store) => store.user.accessToken);
   const username = useSelector((store) => store.user.username);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!accessToken) {
+      navigate('/login')
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     const options = {
@@ -25,93 +32,31 @@ export const Biography = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          dispatch(bio.actions.setError(null));
-          dispatch(bio.actions.setItems(data.response));
+          dispatch(thoughts.actions.setError(null));
+          dispatch(thoughts.actions.setItems(data.response));
         } else {
-          dispatch(bio.actions.setError(data));
-          dispatch(bio.actions.setItems([]));
+          dispatch(thoughts.actions.setError(data.message));
+          dispatch(thoughts.actions.setItems([]));
         }
       });
-  }, []);
+  })
 
-  const handleSubmit = async () => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: accessToken
-      },
-      body: JSON.stringify({ message })
-    };
-
-    try {
-      const response = await fetch(API_URL('bio'), options);
-      const data = await response.json();
-
-      if (data.success) {
-        // Update bioItems with the new bio
-        const updatedBioItems = [...bioItems, data.response];
-        dispatch(bio.actions.setError(null));
-        dispatch(bio.actions.setItems(updatedBioItems));
-      } else {
-        dispatch(bio.actions.setError(data.response));
-      }
-    } catch (error) {
-      console.log('Error:', error);
-    }
-
-    setLoading(false);
-  };
-
-  const onBioDelete = (index) => {
-    dispatch(bio.actions.deleteItem(index));
-  };
-
+  const onLogoutButtonClick = () => {
+    dispatch(user.actions.setAccessToken(null));
+    dispatch(user.actions.setUsername(null));
+    dispatch(user.actions.setUserId(null));
+    dispatch(user.actions.setError(null));
+    dispatch(thoughts.actions.setItems([]));
+  }
   return (
-    <div className="main secrets">
-      <div className="secret-wrapper">
-        <div className="secret-form">
-          <textarea>
-            Hello {username}
-          </textarea>
-          <textarea
-            id="outlined-multiline-static"
-            label="Write your bio here..."
-            rows={2}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)} />
-          <button
-            type="submit"
-            onClick={handleSubmit}>
-            Post bio
-          </button>
-        </div>
-        {isLoading ? (
-          <div className="secret-posts loading">
-            <p>Loading...</p>
-          </div>
-        ) : (
-          <div
-            className="secret-posts"
-            style={bioItems.length === 0 ? { padding: '0 20px' } : { padding: '20px' }}>
-            {bioItems.length > 0 && bioItems.map((item, bioIndex) => (
-              <div className="post" key={bioIndex}>
-                <p>{item.message}</p>
-                <button
-                  type="button"
-                  onClick={() => onBioDelete(bioIndex)}>
-                  delete
-                </button>
-              </div>
-            ))}
-            {bioItems.length === 0 && (
-              <div className="no-secrets">
-                <p>No secrets yet...</p>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
-  )
+    <>
+      <button type="button" onClick={onLogoutButtonClick}>LOGOUT</button>
+      {username ? (<h2>THESE ARE THE THOUGHTS OF {username.toUpperCase()}</h2>) : ''}
+      {thoughtItems.map((item) => {
+        return (<p key={item._id}>{item.message}</p>)
+      })}
+    </>
+  );
 }
+
+export default Main;

@@ -3,6 +3,7 @@ import { React, useState } from 'react'
 import { useCookies } from 'react-cookie' // install by running npm install react-cookie
 import Nav from '../components/Nav'
 import AuthModal from '../components/login'
+import { RegistrationPage } from '../components/registration'
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false)
@@ -39,7 +40,9 @@ const Home = () => {
         </button>
 
         {showModal && (
-          <AuthModal setShowModal={setShowModal} isSignUp={isSignUp} />
+          <AuthModal setShowModal={setShowModal} isSignUp={isSignUp}>
+            {isSignUp ? <RegistrationPage /> : <RegistrationPage />}
+          </AuthModal>
         )}
       </div>
     </div>
