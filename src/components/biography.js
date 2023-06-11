@@ -14,7 +14,7 @@ const BioEditor = () => {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: accessToken
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
           }
         };
         const response = await fetch(API_URL('bio'), options);

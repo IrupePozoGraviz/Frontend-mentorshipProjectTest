@@ -5,9 +5,9 @@ import colorLogo from '../images/color-logo-tinder.png';
 
 // this const is a functional component that takes in props and returns a nav bar with a logo and a login button if we're not logged in. It also sets up an event handler for the login button that sets the show modal state to true and the is sign up state to false
 
-const Nav = ({ authToken, minimal, setShowModal, showModal, setIsSignUp }) => {
+const Nav = ({ authToken, minimal, setLogIn, Login, setIsSignUp }) => {
   const handleClick = () => {
-    setShowModal(true);
+    setLogIn(true);
     setIsSignUp(false);
   };
 
@@ -24,7 +24,7 @@ const Nav = ({ authToken, minimal, setShowModal, showModal, setIsSignUp }) => {
           className="nav-button"
           type="button"
           onClick={handleClick}
-          disabled={showModal}>
+          disabled={Login}>
                     Log in
         </button>
       )}

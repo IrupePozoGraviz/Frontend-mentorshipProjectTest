@@ -1,3 +1,9 @@
+/*Denna sida har hand om Overall, this code sets up a dashboard page 
+that fetches user data, 
+fetches gender-filtered user data, 
+and allows users to swipe through cards representing potential matches. 
+It also handles updating matches and displaying swipe direction information. */
+
 import TinderCard from 'react-tinder-card'
 import { useEffect, useState } from 'react'
 import ChatContainer from '../components/ChatContainer'

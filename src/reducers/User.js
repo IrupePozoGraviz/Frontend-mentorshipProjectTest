@@ -1,45 +1,60 @@
-/* eslint-disable max-len */
-import { createSlice } from '@reduxjs/toolkit'; // install @reduxjs/toolkit by running `npm i @reduxjs/toolkit` in the terminal
+import { createSlice } from '@reduxjs/toolkit';
 
 const user = createSlice({
   name: 'user',
   initialState: {
-    firstName: null, // Add firstname field
     username: null,
-    userId: null,
-    email: null, // Add email field
-    role: null, // Add role field
-    preferences: null, // Add preferences field
+    email: '', // Initialize with an empty string
+    firstName: '', // Initialize with an empty string
+    role: '', // Initialize with an empty string
+    preferences: '', // Initialize with an empty string
     accessToken: null,
-    error: null
+    userId: null,
+    error: null,
+    isOwner: false // Add the isOwner flag with an initial value of false
   },
+
   reducers: {
-    setFirstname: (store, action) => { // Add setFirstname action
-      store.firstname = action.payload;
-    },
     setUsername: (store, action) => {
       store.username = action.payload;
     },
-    setUserId: (store, action) => {
-      store.userId = action.payload;
+    setEmail: (store, action) => {
+      store.email = action.payload;
+    },
+    setFirstname: (store, action) => {
+      store.firstName = action.payload;
+    },
+    setRole: (store, action) => {
+      store.role = action.payload;
+    },
+    setPreferences: (store, action) => {
+      store.preferences = action.payload;
     },
     setAccessToken: (store, action) => {
       store.accessToken = action.payload;
     },
+    setUserId: (store, action) => {
+      store.userId = action.payload;
+    },
     setError: (store, action) => {
       store.error = action.payload;
     },
-    setEmail: (store, action) => { // Add setEmail action
-      store.email = action.payload;
-    },
-    setRole: (store, action) => { // Add setRole action
-      store.role = action.payload;
-    },
-    setPreferences: (store, action) => { // Add setPreferences action
-      store.preferences = action.payload;
+    setIsOwner: (store, action) => {
+      store.isOwner = action.payload;
     }
   }
 });
 
-export const { setUsername, setUserId, setAccessToken, setError, setEmail, setRole, setPreferences, setFirstname } = user.actions;
+export const {
+  setUsername,
+  setEmail,
+  setFirstname,
+  setRole,
+  setPreferences,
+  setAccessToken,
+  setUserId,
+  setError,
+  setIsOwner
+} = user.actions;
+
 export default user;

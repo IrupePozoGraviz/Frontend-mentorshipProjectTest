@@ -1,24 +1,23 @@
 /* eslint-disable react/jsx-no-undef */
+// login knappar = authmodal = sign in
 import { React, useState } from 'react'
 import { useCookies } from 'react-cookie' // install by running npm install react-cookie
 import Nav from '../components/Nav'
-import AuthModal from '../components/login'
+import LogIn from '../components/login'
 import { RegistrationPage } from '../components/registration'
 
 const Home = () => {
-  const [showModal, setShowModal] = useState(false)
+  const [Login, setLogIn] = useState(false)
   const [isSignUp, setIsSignUp] = useState(true)
   const [cookies] = useCookies(['user'])
   const authToken = cookies.AuthToken
 
   const handleClick = () => {
     if (authToken) {
-      // removeCookie('UserId', cookies.UserId)
-      // removeCookie('AuthToken', cookies.AuthToken)
       window.location.reload()
       return
     }
-    setShowModal(true)
+    setLogIn(true)
     setIsSignUp(true)
   }
 
@@ -27,8 +26,8 @@ const Home = () => {
       <Nav
         authToken={authToken}
         minimal={false}
-        setShowModal={setShowModal}
-        showModal={showModal}
+        setLogIn={setLogIn}
+        Login={Login}
         setIsSignUp={setIsSignUp} />
       <div className="home">
         <h1 className="primary-title">Mentor</h1>
@@ -39,10 +38,10 @@ const Home = () => {
           {authToken ? 'Signout' : 'Create Account'}
         </button>
 
-        {showModal && (
-          <AuthModal setShowModal={setShowModal} isSignUp={isSignUp}>
-            {isSignUp ? <RegistrationPage /> : <RegistrationPage />}
-          </AuthModal>
+        {Login && (
+          <LogIn setLogIn={setLogIn} isSignUp={isSignUp}>
+            {isSignUp ? <RegistrationPage /> : <LogIn />}
+          </LogIn>
         )}
       </div>
     </div>

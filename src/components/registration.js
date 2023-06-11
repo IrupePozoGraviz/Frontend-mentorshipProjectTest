@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from './Utils'
+import { useSelector } from 'react-redux';
+import { API_URL } from './Utils';
 
 export const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export const RegistrationPage = () => {
   const [role, setRole] = useState('');
   const [preferences, setPreferences] = useState([]);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
-
+  const accessToken = useSelector((store) => store.user.accessToken);
   useEffect(() => {
     if (registrationSuccess) {
       // Redirect to the profile page after successful registration
@@ -48,7 +49,7 @@ export const RegistrationPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          Authorization: accessToken
           // Include the access token in the request headers
         },
         body: JSON.stringify(user)

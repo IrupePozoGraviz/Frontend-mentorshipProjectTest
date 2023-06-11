@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -10,7 +11,7 @@ import user from '../reducers/user'
 import { API_URL } from './Utils'
 import { RegistrationPage } from './registration'
 
-const AuthModal = ({ setShowModal, isSignUp }) => {
+const LogIn = ({ setLogIn, isSignUp }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState(null)
   const login = 'login'; // this is the slug for the login endpoint
@@ -19,21 +20,20 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   const accessToken = useSelector((store) => store.user.accessToken);
 
   const handleClick = () => {
-    setShowModal(false)
+    setLogIn(false)
   }
   useEffect(() => {
     if (accessToken) {
       navigate('/profile');
     }
-  }, [accessToken, navigate]);
+  }, [accessToken]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: accessToken
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ username, password })
     };
@@ -42,9 +42,14 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       .then((data) => {
         console.log('Login Data:', data);
         if (data.success) {
+          dispatch(user.actions.setUsername(data.response.username));
+          dispatch(user.actions.setAccessToken(data.response.accessToken));
           dispatch(user.actions.setError(null));
+          setLogIn(false)
         } else {
-          dispatch(user.actions.setError(data.response));
+          dispatch(user.actions.setAccessToken(null));
+          dispatch(user.actions.setUsername(null));
+          dispatch(user.actions.setError(data.response))
         }
       });
   };
@@ -80,4 +85,4 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
     </div>
   )
 }
-export default AuthModal
+export default LogIn

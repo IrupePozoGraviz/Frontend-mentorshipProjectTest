@@ -1,3 +1,6 @@
+/** In summary, this code sets up a Tinder-like card interface with
+ * swipe functionality, populating the cards with people's information. */
+
 import React, { useState } from 'react';
 import TinderCard from 'react-tinder-card';
 import './TinderCards.css';
