@@ -1,10 +1,6 @@
 // denna sida staplar upp alla matches men utan att matcha for now
 
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable react/jsx-no-undef */
+/*
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { match } from '../reducers/match';
@@ -66,3 +62,4 @@ export const MatchedPairs = () => {
     </div>
   );
 };
+*/
