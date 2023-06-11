@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import io from 'socket.io-client';
-import { setUsername, setEmail, setRole, setPreferences, setError, setFirstname } from '../reducers/user';
+import { setUsername, setEmail, setRole, setPreferences, setFirstname, setError } from '../reducers/user';
 import { API_URL } from './Utils';
 import BioEditor from './biography';
 import { Picture } from './profilePic';
