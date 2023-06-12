@@ -11,6 +11,7 @@ import { match } from './reducers/match';
 import { ProfilePage } from './components/profile';
 /* import TinderCards from './components/TinderCards'; */
 import { Dashboard } from './components/DashBoard';
+import { EditProfilePage } from './components/EditProfilePage';
 import Home from './pages/Home';
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           {/* <Route path="/tinder-cards" element={<TinderCards />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/matches" element={<Dashboard />} />
+          <Route path="/edit" element={<EditProfilePage />} />
         </Routes>
       </BrowserRouter>
     </Provider>

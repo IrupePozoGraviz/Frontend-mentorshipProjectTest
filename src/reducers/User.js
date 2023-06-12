@@ -30,9 +30,6 @@ const user = createSlice({
     setPreferences: (store, action) => {
       store.preferences = action.payload;
     },
-    setAccessToken: (store, action) => {
-      store.accessToken = action.payload;
-    },
     setUserId: (store, action) => {
       store.userId = action.payload;
     },
@@ -41,6 +38,9 @@ const user = createSlice({
     },
     setIsOwner: (store, action) => {
       store.isOwner = action.payload;
+    },
+    setAccessToken: (store, action) => {
+      store.accessToken = action.payload;
     }
   }
 });
