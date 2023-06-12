@@ -2,17 +2,18 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react-hooks/exhaustive-deps */
+
 /* Denna sida har hand om Overall, this code sets up a dashboard page
 that fetches user data,
 fetches gender-filtered user data,
 and allows users to swipe through cards representing potential matches.
 It also handles updating matches and displaying swipe direction information. */
 
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { match } from '../reducers/match';
 import { API_URL } from './Utils';
+import TinderCards from './TinderCards';
 
 export const Dashboard = () => {
   const [matchedMentors, setMatchedMentors] = useState([]);
@@ -58,6 +59,14 @@ export const Dashboard = () => {
   }, []);
 
   const filteredMentors = matchedMentors.filter((mentor) => mentor.preferences.includes(userPreferences));
+  const handleAcceptMentor = (mentor) => {
+    const updatedMentors = matchedMentors.filter((m) => m.id !== mentor.id);
+    setMatchedMentors(updatedMentors);
+  };
+  const handleDeclineMentor = (mentor) => {
+    const updatedMentors = matchedMentors.filter((m) => m.id !== mentor.id);
+    setMatchedMentors(updatedMentors);
+  };
 
   return (
     <div>
@@ -65,17 +74,10 @@ export const Dashboard = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div>
-          {filteredMentors.length > 0 ? (
-            filteredMentors.map((mentor, index) => (
-              <div key={index}>
-                <p>Mentor Name: {mentor.username}</p>
-              </div>
-            ))
-          ) : (
-            <p>No matched mentors found for the current users preferences.</p>
-          )}
-        </div>
+        <TinderCards
+          matchedMentors={filteredMentors}
+          handleAcceptMentor={handleAcceptMentor}
+          handleDeclineMentor={handleDeclineMentor} />
       )}
     </div>
   );

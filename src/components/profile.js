@@ -62,25 +62,38 @@ export const ProfilePage = () => {
         <div key={userId} className="box-container">
           <div className="profile-header">
             <h1>{`${userProfile.username}'s Profile`}</h1>
+            <p>{`role: ${userProfile.role}`}</p>
+          </div>
+          <div className="profile-image">
+            <img src={userProfile.imageUrl} alt="profile" />
           </div>
 
           <div className="profile-info">
+            <p>detta ska bort och in i edit profile</p>
             <p>{`email: ${isOwner ? userProfile.email : 'Not visible'}`}</p>
             <p>{`name: ${userProfile.firstName}`}</p>
-            <p>{`role: ${userProfile.role}`}</p>
             <p>{`preferences: ${userProfile.preferences}`}</p>
           </div>
           <section className="bio-section">
+            <h2>Bio- flyttas till edit</h2>
             {isOwner ? <BioEditor /> : <p>Bio not visible</p>}
           </section>
           <section className="matches-section">
             <h2>Matches</h2>
+            <p>Här ser vi vilken metor som en tackat ja till som en kan
+               trycvka på och hamna i dess profil
+            </p>
             {isOwner ? (
               <Dashboard />
             ) : (
               <p>{`Number of Matches: ${matchedPairs.length}`}</p>
             )}
           </section>
+          <div>
+            <p> Här vill vi att det ska komma upp en
+              länk till dashboard när en har matchningar
+            </p>
+          </div>
         </div>
       )}
     </main>

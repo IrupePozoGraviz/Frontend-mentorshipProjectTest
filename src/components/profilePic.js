@@ -50,6 +50,7 @@ export const Picture = ({ userId }) => {
         body: formData
       };
       const response = await fetch(API_URL(`user/${userId}/upload-profile-picture`), options);
+
       if (response.ok) {
         console.log('Profile picture uploaded successfully!');
       } else {

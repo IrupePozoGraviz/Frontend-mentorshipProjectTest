@@ -9,7 +9,7 @@ import user from './reducers/user';
 import bio from './reducers/bio';
 import { match } from './reducers/match';
 import { ProfilePage } from './components/profile';
-import TinderCards from './components/TinderCards/TinderCards';
+import TinderCards from './components/TinderCards';
 import { Dashboard } from './components/DashBoard';
 import Home from './pages/Home';
 
