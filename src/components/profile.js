@@ -3,7 +3,7 @@
 // detta är privata profilen som ej ses av andra användare
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUsername, setEmail, setRole, setPreferences, setFirstname, setError } from '../reducers/user';
+import { setUsername, setEmail, setRole, setPreferences, setFirstName, setError } from '../reducers/User';
 import { API_URL } from './Utils';
 import { Dashboard } from './DashBoard';
 import BioEditor from './biography';
@@ -38,7 +38,7 @@ export const ProfilePage = () => {
           dispatch(setEmail(email));
           dispatch(setRole(role));
           dispatch(setPreferences(preferences));
-          dispatch(setFirstname(firstName));
+          dispatch(setFirstName(firstName));
           dispatch(setError(null));
         } else {
           dispatch(setError('Failed to fetch user profile.'));

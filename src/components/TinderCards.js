@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { API_URL } from './Utils';
 import './TinderCards.css';
-import { setUsername, setRole, setPreferences, setError } from '../reducers/user';
+import { setUsername, setRole, setPreferences, setError } from '../reducers/User';
 
 const TinderCards = ({ handleAcceptMentor, handleDeclineMentor }) => {
   const accessToken = useSelector((store) => store.user.accessToken);

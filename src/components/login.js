@@ -7,7 +7,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import user from '../reducers/user'
+import user from '../reducers/User'
 import { API_URL } from './Utils'
 import { RegistrationPage } from './registration'
 
@@ -43,9 +43,9 @@ const LogIn = ({ setLogIn, isSignUp }) => {
         console.log('Login Data:', data);
         if (data.success) {
           dispatch(user.actions.setUsername(data.response.username));
-          dispatch(user.actions.setAccessToken(data.response.accessToken));
+          dispatch(user.actions.setUserId(data.response.id));
           dispatch(user.actions.setError(null));
-          setLogIn(false)
+          dispatch(user.actions.setAccessToken(data.response.accessToken));
         } else {
           dispatch(user.actions.setAccessToken(null));
           dispatch(user.actions.setUsername(null));

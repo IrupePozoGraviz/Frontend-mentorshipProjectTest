@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import user from '../reducers/User';
 import { API_URL } from './Utils';
 
 export const RegistrationPage = () => {
@@ -12,28 +14,27 @@ export const RegistrationPage = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [role, setRole] = useState('');
+  const dispatch = useDispatch();
   const [preferences, setPreferences] = useState([]);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const accessToken = useSelector((store) => store.user.accessToken);
   useEffect(() => {
-    if (registrationSuccess) {
+    if (accessToken) {
       // Redirect to the profile page after successful registration
-      setTimeout(() => {
-        navigate('/profile');
-      }, 2000);
+      navigate('/profile');
     }
-  }, [registrationSuccess, navigate]);
+  }, [accessToken]);
 
-  const handlePreferenceChange = (e) => {
+  function handlePreferenceChange(e) {
     const selectedPreferences = Array.from(e.target.selectedOptions, (option) => option.value);
     setPreferences(selectedPreferences);
-  };
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // Create a user object with the form data
-    const user = {
+    const users = {
       username,
       password,
       email,
@@ -43,70 +44,96 @@ export const RegistrationPage = () => {
       preferences
     };
 
-    // Send a POST request to the backend API
-    try {
-      const response = await fetch(API_URL('register'), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: accessToken
-          // Include the access token in the request headers
-        },
-        body: JSON.stringify(user)
-      });
-
-      // Check the response status
-      if (response.ok) {
-        // Registration successful
-        const data = await response.json();
-        console.log('Registration successful:', data);
-        setRegistrationSuccess(true);
-
-        // Redirect to the profile page after successful registration
-        setTimeout(() => {
-          navigate('/profile');
-        }, 2000);
-      } else {
-        // Registration failed
-        const error = await response.json();
-        console.log('Registration failed:', error);
-      }
-    } catch (error) {
-      // Network error
-      console.log('Network error:', error);
-    }
-  };
-
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(users)
+    };
+    fetch(API_URL('register'), options)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          dispatch(user.actions.setUsername(data.response.username));
+          dispatch(user.actions.setUserId(data.response.id));
+          dispatch(user.actions.setRole(data.response.role));
+          dispatch(user.actions.setPreferences(data.response.preferences));
+          dispatch(user.actions.setFirstName(data.response.firstName));
+          dispatch(user.actions.setLastName(data.response.lastName));
+          setRegistrationSuccess(true);
+          dispatch(user.actions.setError(null));
+          dispatch(user.actions.setAccessToken(data.response.accessToken));
+        } else {
+          dispatch(user.actions.setAccessToken(null));
+          dispatch(user.actions.setUsername(null));
+          dispatch(user.actions.setError(data.response))
+        }
+      })
+  }
   return (
     <div>
       <h2>Registration Page</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <label
+            htmlFor="username">Username:
+          </label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)} />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label
+            htmlFor="password">Password:
+          </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label
+            htmlFor="email">Email:
+          </label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div>
-          <label htmlFor="firstName">First Name:</label>
-          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          <label
+            htmlFor="firstName">First Name:
+          </label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)} />
         </div>
         <div>
-          <label htmlFor="lastName">Last Name:</label>
-          <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+          <label
+            htmlFor="lastName">Last Name:
+          </label>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)} />
         </div>
         <div>
           <label>Role:</label>
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="">Select role</option>
-            <option value="mentor">Mentor</option>
-            <option value="mentee">Mentee</option>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}>
+            <option
+              value="">Select role
+            </option>
+            <option
+              value="mentor">Mentor
+            </option>
+            <option
+              value="mentee">Mentee
+            </option>
           </select>
         </div>
         <div>

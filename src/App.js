@@ -5,11 +5,11 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import user from './reducers/user';
+import user from './reducers/User';
 import bio from './reducers/bio';
 import { match } from './reducers/match';
 import { ProfilePage } from './components/profile';
-import TinderCards from './components/TinderCards';
+/* import TinderCards from './components/TinderCards'; */
 import { Dashboard } from './components/DashBoard';
 import Home from './pages/Home';
 
@@ -27,7 +27,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/tinder-cards" element={<TinderCards />} />
+          {/* <Route path="/tinder-cards" element={<TinderCards />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/matches" element={<Dashboard />} />
         </Routes>

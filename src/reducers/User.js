@@ -21,7 +21,7 @@ const user = createSlice({
     setEmail: (store, action) => {
       store.email = action.payload;
     },
-    setFirstname: (store, action) => {
+    setFirstName: (store, action) => {
       store.firstName = action.payload;
     },
     setRole: (store, action) => {
@@ -48,7 +48,7 @@ const user = createSlice({
 export const {
   setUsername,
   setEmail,
-  setFirstname,
+  setFirstName,
   setRole,
   setPreferences,
   setAccessToken,
