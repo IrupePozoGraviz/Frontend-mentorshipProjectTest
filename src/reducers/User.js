@@ -10,6 +10,7 @@ const user = createSlice({
     preferences: '', // Initialize with an empty string
     accessToken: null,
     userId: null,
+    likedPersons: null,
     error: null,
     isOwner: false // Add the isOwner flag with an initial value of false
   },
@@ -32,6 +33,9 @@ const user = createSlice({
     },
     setUserId: (store, action) => {
       store.userId = action.payload;
+    },
+    setLikedPersons: (store, action) => {
+      store.likedPersons = action.payload;
     },
     setError: (store, action) => {
       store.error = action.payload;

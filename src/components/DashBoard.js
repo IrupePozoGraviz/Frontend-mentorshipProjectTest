@@ -93,7 +93,7 @@ export const Dashboard = () => {
   }
 
   return (
-    <main className="profile-container">
+    <main className="dashboard">
 
       <div key={userId} className="box-container">
 
@@ -114,17 +114,61 @@ export const Dashboard = () => {
   );
 };
 
+// make a onclick event that for a "like-button" that triggers a function that adds the user to the matchlist in the database by sending a PUT/PATCH request to the backend that updates the matchlist for the user in the database (in an array in the database) like this:
+// make a onclick event that for a "dislike-button" that triggers a function that adds the user to the matchlist in the database by sending a PUT/PATCH request to the backend that updates the matchlist for the user in the database (in an array in the database)
+const handleLikePerson = () => {
+  fetch(API_URL(`user/${userId}`), {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: accessToken
+    },
+    body: JSON.stringify({
+      likePersons: { userId }
+    })
+  })
+    .then((res) => res.json())
+    .then((json) => {
+      if (json.success) {
+        // om ni vill navigera
+      } else {
+        console.error('Failed to save liked person')
+      }
+    })
+    .catch((error) => {
+      console.error('Failed to save liked Person', error)
+    })
+}
 // style det här! // behvöer en like knapp som skickar med user-id för det kortet som triggar en PUT/PATCH i backendet som uppdaterar matchen i databasen för den användaren och lägger till den i matchlistan för den användaren (i en array i databasen)
 // behöver en dislike knapp som triggar en PUT/PATCH i backendet som uppdaterar matchen i databasen för den användaren och lägger till den i matchlistan för den användaren (i en array i databasen)
 
 const UserCard = ({ user }) => {
   console.log('user', user)
   return (
-    <div className="mentorcard">
-      <p> Mentor card</p>
-      <p>{user.username}</p>
-      <p>{user.role}</p>
-      {/* {user.preferences.map((pref) => <p>{pref}</p>)} */}
+    <div className="swipe-container">
+      <div className="card-container">
+        <div className="kort">
+          <img
+            src="https://placebear.com/200/300"
+            alt="Profile"
+            style={{ width: 200, height: 300 }} />
+          <p> Mentor card</p>
+          <p> Picture of person </p>
+          <p>{user.username}</p>
+          <p>{user.role}</p>
+          <p> preferences: </p>
+          <p> info about our selfs </p>
+          <p> Emojis to show extra </p>
+          {/* {user.preferences.map((pref) => <p>{pref}</p>)} */}
+        </div>
+        <button
+          type="submit">Accept
+        </button>
+        <button
+          type="submit">
+          Decline
+        </button>
+      </div>
     </div>
   )
 }
