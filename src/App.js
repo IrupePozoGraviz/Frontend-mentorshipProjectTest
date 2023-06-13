@@ -9,7 +9,7 @@ import user from './reducers/User';
 import bio from './reducers/bio';
 import { match } from './reducers/match';
 import { ProfilePage } from './components/profile';
-/* import TinderCards from './components/TinderCards'; */
+import TinderCards from './components/TinderCards';
 import { Dashboard } from './components/DashBoard';
 import { EditProfilePage } from './components/EditProfilePage';
 import Home from './pages/Home';
@@ -30,7 +30,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           {/* <Route path="/tinder-cards" element={<TinderCards />} /> */}
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/matches" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/tinder-cards" element={<TinderCards />} />
           <Route path="/edit" element={<EditProfilePage />} />
         </Routes>
       </BrowserRouter>

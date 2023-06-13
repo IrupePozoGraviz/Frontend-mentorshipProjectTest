@@ -24,7 +24,7 @@ const LogIn = ({ setLogIn, isSignUp }) => {
   }
   useEffect(() => {
     if (accessToken) {
-      navigate('/profile');
+      navigate('/dashboard');
     }
   }, [accessToken]);
 
@@ -43,7 +43,9 @@ const LogIn = ({ setLogIn, isSignUp }) => {
         console.log('Login Data:', data);
         if (data.success) {
           dispatch(user.actions.setUsername(data.response.username));
+          dispatch(user.actions.setRole('mentee'));
           dispatch(user.actions.setUserId(data.response.id));
+          // ändra detta så att hela usern blir sparad i global store när man loggar in
           dispatch(user.actions.setError(null));
           dispatch(user.actions.setAccessToken(data.response.accessToken));
         } else {

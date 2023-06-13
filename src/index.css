@@ -361,3 +361,7 @@ nav .logo-container .logo {
   rgb(220, 219, 219) 100%);
   
 }
+
+.mentorcard{
+  border: solid 5px pink;
+}

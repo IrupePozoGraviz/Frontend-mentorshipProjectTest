@@ -4,9 +4,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { API_URL } from './Utils';
+/* import TinderCard from 'react-tinder-card'; */
 import './TinderCards.css';
 import { setUsername, setRole, setPreferences, setError } from '../reducers/User';
+import { API_URL } from './Utils';
 
 const TinderCards = ({ handleAcceptMentor, handleDeclineMentor }) => {
   const accessToken = useSelector((store) => store.user.accessToken);
