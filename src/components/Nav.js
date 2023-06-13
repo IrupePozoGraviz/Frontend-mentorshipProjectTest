@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
-import logoHorizontal from '../images/logoHorizontal.png';
+import TeQueenMatchLogo from '../images/TeQueenMatchLogo.png';
 import MentorLogo from '../images/MentorLogo.png';
 
 // this const is a functional component that takes in props and returns a nav bar with a logo and a login button if we're not logged in. It also sets up an event handler for the login button that sets the show modal state to true and the is sign up state to false
@@ -16,7 +16,7 @@ const Nav = ({ authToken, minimal, setLogIn, Login, setIsSignUp }) => {
       <div className="logo-container">
         <img
           className="logo"
-          src={minimal ? MentorLogo : logoHorizontal} // means if minimal is true, show colorLogo, else show whiteLogo
+          src={minimal ? MentorLogo : TeQueenMatchLogo} // means if minimal is true, show colorLogo, else show whiteLogo
           alt="logo" />
       </div>
       {!authToken && !minimal && ( // only show the login button if we're not logged in and we're not on the minimal page

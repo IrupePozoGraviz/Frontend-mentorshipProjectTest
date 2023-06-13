@@ -44,6 +44,7 @@ export const Dashboard = () => {
 
         if (data.success) {
           console.log(data.response)
+
           // här ska vi spara users i en state variable
 
           // om användaren är mentor, vill vi bara spara mentees
@@ -116,7 +117,7 @@ export const Dashboard = () => {
 
 // make a onclick event that for a "like-button" that triggers a function that adds the user to the matchlist in the database by sending a PUT/PATCH request to the backend that updates the matchlist for the user in the database (in an array in the database) like this:
 // make a onclick event that for a "dislike-button" that triggers a function that adds the user to the matchlist in the database by sending a PUT/PATCH request to the backend that updates the matchlist for the user in the database (in an array in the database)
-const handleLikePerson = () => {
+/* const handleLikePerson = () => {
   fetch(API_URL(`user/${userId}`), {
     method: 'PATCH',
     headers: {
@@ -138,7 +139,7 @@ const handleLikePerson = () => {
     .catch((error) => {
       console.error('Failed to save liked Person', error)
     })
-}
+} */
 // style det här! // behvöer en like knapp som skickar med user-id för det kortet som triggar en PUT/PATCH i backendet som uppdaterar matchen i databasen för den användaren och lägger till den i matchlistan för den användaren (i en array i databasen)
 // behöver en dislike knapp som triggar en PUT/PATCH i backendet som uppdaterar matchen i databasen för den användaren och lägger till den i matchlistan för den användaren (i en array i databasen)
 

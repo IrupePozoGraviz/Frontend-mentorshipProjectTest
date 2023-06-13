@@ -12,6 +12,7 @@ import { ProfilePage } from './components/profile';
 import TinderCards from './components/TinderCards';
 import { Dashboard } from './components/DashBoard';
 import { EditProfilePage } from './components/EditProfilePage';
+import { Picture } from './components/profilePic'
 import Home from './pages/Home';
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tinder-cards" element={<TinderCards />} />
           <Route path="/edit" element={<EditProfilePage />} />
+          <Route path="/picture" element={<Picture />} />
         </Routes>
       </BrowserRouter>
     </Provider>

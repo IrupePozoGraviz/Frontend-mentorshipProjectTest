@@ -30,7 +30,8 @@ const Home = () => {
         Login={Login}
         setIsSignUp={setIsSignUp} />
       <div className="home">
-        <h1 className="primary-title">Mentor</h1>
+        <h1 className="primary-title">teQueenMatch</h1>
+        <p className="primary-text"> Changing tech one mentorship at a time</p>
         <button
           type="button"
           className="primary-button"
