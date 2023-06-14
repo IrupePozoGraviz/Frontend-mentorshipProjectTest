@@ -409,25 +409,41 @@ margin: 10px;
 }
 
 .edit-container form label {
-  margin: 10px 0;
+  margin: 10px 10px;
 }
 
-.edit-container form .multiple-input-container {
+/* CSS */
+.multiple-input-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+    margin-bottom: 10px;
 }
 
-.edit-container form .multiple-input-container input {
-  margin-right: 10px;
+label {
+  font-weight: bold;
+  margin: 10px 10px;
 }
 
-.edit-container form .multiple-input-container label {
-  padding: 10px;
-  border: solid 2px rgb(144, 144, 144);
-  border-radius: 10px;
-  transition: all 0.3s;
-  margin-right: 10px;
+select {
+  width: 200px;
+  padding: 5px;
+  border-radius: 5px;
 }
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: solid 2px rgb(219, 219, 219);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
 
 /*-------- Photo Container --------*/
 /*
