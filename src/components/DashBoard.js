@@ -1,3 +1,4 @@
+
 /* eslint-disable */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable max-len */
@@ -32,10 +33,14 @@ export const Dashboard = () => {
   accessToken = !accessToken && localStorage.getItem('accessToken');
   const currentUser = useSelector((store) => store.user);
   /* const userPreferences = useSelector((store) => store.user.preferences); */
-
+  console.log('userId:', userId);
+  console.log('accessToken:', accessToken);
+  console.log('currentUser:', currentUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log('accessToken:', accessToken);
+    console.log('userId:', userId);
     const fetchUsers = async () => {
       setLoading(true);
       try {
@@ -85,7 +90,10 @@ export const Dashboard = () => {
       fetchUsers();
     }
   }, [dispatch, accessToken, userId]);
-
+  console.log('matchingList:', matchingList);
+  console.log('loading:', loading);
+  console.log('likedUsers:', likedUsers);
+  console.log('dislikedUsers:', dislikedUsers);
 
   const onSwipe = (direction) => {
     console.log(`You swiped: ${direction}`)
@@ -193,41 +201,3 @@ export const Dashboard = () => {
     </main>
   );
 };
-
-// style det här! // behvöer en like knapp som skickar med user-id för det kortet som triggar en PUT/PATCH i backendet som uppdaterar matchen i databasen för den användaren och lägger till den i matchlistan för den användaren (i en array i databasen)
-// behöver en dislike knapp som triggar en PUT/PATCH i backendet som uppdaterar matchen i databasen för den användaren och lägger till den i matchlistan för den användaren (i en array i databasen)
-
-// make a onclick event that for a "like-button" that triggers a function that adds the user to the matchlist in the database by sending a PUT/PATCH request to the backend that updates the matchlist for the user in the database (in an array in the database) like this:
-// make a onclick event that for a "dislike-button" that triggers a function that adds the user to the matchlist in the database by sending a PUT/PATCH request to the backend that updates the matchlist for the user in the database (in an array in the database)
-
-// const UserCard = ({ user }) => {
-//   console.log('user', user)
-//   return (
-//     <div className="swipe-container">
-//       <div className="card-container">
-//         <div className="kort">
-//           <img
-//             src="https://placebear.com/200/300"
-//             alt="Profile"
-//             style={{ width: 200, height: 300 }} />
-//           <p> Mentor card</p>
-//           <p> Picture of person </p>
-//           <p>{user.username}</p>
-//           <p>{user.role}</p>
-//           <p> preferences: </p>
-//           <p> info about our selfs </p>
-//           <p> Emojis to show extra </p>
-//           {/* {user.preferences.map((pref) => <p>{pref}</p>)} */}
-//         </div>
-//         <button
-//           type="button"
-//           onClick={() => handleLikePerson(user.id)}>Accept
-//         </button>
-//         <button
-//           type="submit">
-//           Decline
-//         </button>
-//       </div>
-//     </div>
-//   )
-// }

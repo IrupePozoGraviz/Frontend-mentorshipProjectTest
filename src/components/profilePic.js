@@ -98,7 +98,7 @@ export const Picture = () => {
   };
 
   return (
-    <div className="photo-container">
+    <div className="picture-container">
       <h2>Profile Picture</h2>
       {profilePicture && <img src={profilePicture} alt="Profile" />}
       <input type="file" onChange={handleFileChange} />

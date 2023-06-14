@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from './Utils';
 import { Picture } from './profilePic';
+import Aretha from '../images/aretha.jpeg';
 
 export const EditProfilePage = () => {
   const navigate = useNavigate();
@@ -23,8 +24,8 @@ export const EditProfilePage = () => {
   const [role, setRole] = useState('');
   const [preferences, setPreferences] = useState([]);
   const userId = useSelector((store) => store.user.userId);
-  const accessToken = useSelector((store) => store.user.accessToken);
-
+  let accessToken = useSelector((store) => store.user.accessToken);
+  accessToken = !accessToken && localStorage.getItem('accessToken');
   const handlePreferenceChange = (e) => {
     const selectedPreferences = Array.from(e.target.selectedOptions, (option) => option.value);
     setPreferences(selectedPreferences);
@@ -91,7 +92,7 @@ export const EditProfilePage = () => {
   return (
     <div className="edit-container">
       <h2>Edit Profile</h2>
-      <Picture className="photo-container" />
+      <Picture className="picture-container" />
       <section className="form-container">
         <form onSubmit={handleSubmit}>
           <div>
@@ -134,7 +135,7 @@ export const EditProfilePage = () => {
           <button type="submit">Save</button>
         </form>
       </section>
-      <button type="submit" onClick={handleDeleteProfile}>Delete Profile</button>
+      <button className="btnEdit" type="submit" onClick={handleDeleteProfile}>Delete Profile</button>
     </div>
   );
 };

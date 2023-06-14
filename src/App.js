@@ -6,8 +6,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import user from './reducers/User';
-import bio from './reducers/bio';
-import { match } from './reducers/match';
 import TinderCards from './components/TinderCards';
 import { Dashboard } from './components/DashBoard';
 import { EditProfilePage } from './components/EditProfilePage';
@@ -16,9 +14,7 @@ import Home from './pages/Home';
 
 const App = () => {
   const reducer = combineReducers({
-    user: user.reducer,
-    bio: bio.reducer,
-    match: match.reducer
+    user: user.reducer
   });
   const store = configureStore({ reducer });
 
