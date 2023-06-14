@@ -247,7 +247,7 @@ nav .logo-container .logo {
   padding: 10px;
 }
 /*-------- Cards --------*/
-.card-containers{
+/*.card-containers{
 padding: 0px;
 width: 100%;
 position: absolute;
@@ -269,6 +269,7 @@ margin: 10px;
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
 }
+*/
 
 /*-------- Chat Container --------*/
 .chat-container {
@@ -429,6 +430,7 @@ margin: 10px;
 }
 
 /*-------- Photo Container --------*/
+/*
 .photo-container{
   display: flex;
   justify-content: center;
@@ -450,7 +452,7 @@ height: 400px;
 background: rgba(255, 255, 255, 0.6);
 border: 1px solid #FFFFFF;
 backdrop-filter: blur(50px);
-/* Note: backdrop-filter has minimal browser support */
+/* Note: backdrop-filter has minimal browser support 
 border-radius: 20px;
 }
 input[type="file"] {
@@ -491,3 +493,5 @@ background: #FDFDFD;
 box-shadow: 3px 4px 2px -2px rgba(0, 0, 0, 0.32);
 border-radius: 18.5px;
 }
+
+*/

@@ -1,21 +1,12 @@
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-tabs */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable max-len */
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/jsx-no-undef */
-/* In this example, the EditProfilePage component renders a  form with input fields for each profile attribute (username, email, role, preferences, and firstName). 
- The value of each input field is set based on the userProfile 
- state obtained from the Redux store using useSelector. 
- When the user makes changes to the input fields, the corresponding set action from the Redux store is dispatched to update the state.
-The form submission triggers the handleSubmit function, 
-which sends a PUT request to the server to update the user's profile. 
-You can handle the successful update and error cases within the handleSubmit function.
-
-/* eslint-disable jsx-a11y/label-has-associated-control */
+// eslint-disable-next-line import/no-named-as-default
+/* eslint-disable */
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable max-len */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react-hooks/exhaustive-deps */
-
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
