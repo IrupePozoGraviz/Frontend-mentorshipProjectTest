@@ -28,7 +28,7 @@ export const Picture = () => {
             Authorization: accessToken
           }
         };
-        const response = await fetch(API_URL('user/647edebae2a9928a0dcf623d/profile-picture'), options);
+        const response = await fetch(API_URL(`user/${userId}/profile-picture`), options);
         if (response.ok) {
           const pictureBlob = await response.blob();
           const pictureUrl = URL.createObjectURL(pictureBlob);
@@ -62,7 +62,7 @@ export const Picture = () => {
         },
         body: formData
       };
-      const response = await fetch(API_URL('user/647edebae2a9928a0dcf623d/upload-profile-picture'), options);
+      const response = await fetch(API_URL(`user/${userId}/upload-profile-picture`), options);
       if (response.ok) {
         console.log('Profile picture uploaded successfully!');
         setProfilePicture(URL.createObjectURL(selectedFile));
@@ -85,7 +85,7 @@ export const Picture = () => {
         },
         body: formData
       };
-      const response = await fetch(API_URL('user/647edebae2a9928a0dcf623d/delete-profile-picture'), options);
+      const response = await fetch(API_URL(`user/${userId}/delete-profile-picture`), options);
       if (response.ok) {
         console.log('Profile picture deleted successfully!');
         setProfilePicture(null);

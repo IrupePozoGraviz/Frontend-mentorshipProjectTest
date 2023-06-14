@@ -43,9 +43,12 @@ const LogIn = ({ setLogIn, isSignUp }) => {
         console.log('Login Data:', data);
         if (data.success) {
           dispatch(user.actions.setUsername(data.response.username));
-          dispatch(user.actions.setRole('mentee'));
           dispatch(user.actions.setUserId(data.response.id));
-          // ändra detta så att hela usern blir sparad i global store när man loggar in
+          dispatch(user.actions.setRole(data.response.role));
+          dispatch(user.actions.setFirstName(data.response.firstName));
+          dispatch(user.actions.setLastName(data.response.lastName));
+          dispatch(user.actions.setEmail(data.response.email));
+          dispatch(user.actions.setPreferences(data.response.preferences));
           dispatch(user.actions.setError(null));
           dispatch(user.actions.setAccessToken(data.response.accessToken));
         } else {

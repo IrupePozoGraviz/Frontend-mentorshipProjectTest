@@ -6,13 +6,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import user from './reducers/User';
-import TinderCards from './components/TinderCards';
+// import { UserCard } from './TinderCardTest';
+// import LoginPage from './components/MockupLogin'
 import { Dashboard } from './components/DashBoard';
 import { EditProfilePage } from './components/EditProfilePage';
 import { Picture } from './components/profilePic'
 import Home from './pages/Home';
 
-const App = () => {
+export const App = () => {
   const reducer = combineReducers({
     user: user.reducer
   });
@@ -26,7 +27,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           {/* <Route path="/tinder-cards" element={<TinderCards />} /> */}
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tinder-cards" element={<TinderCards />} />
+          {/*     <Route path="/tinder-cards" element={<TinderCards />} /> */}
           <Route path="/edit" element={<EditProfilePage />} />
           <Route path="/picture" element={<Picture />} />
         </Routes>
@@ -35,6 +36,3 @@ const App = () => {
 
   )
 }
-
-export default App
-

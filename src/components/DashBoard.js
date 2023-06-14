@@ -19,6 +19,8 @@ import TinderCard from 'react-tinder-card'
 import { API_URL } from './Utils';
 import { setError } from '../reducers/User';
 
+
+
 export const Dashboard = () => {
   const [matchingList, setMatchingList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -119,7 +121,7 @@ export const Dashboard = () => {
 
   // const fakeLoggedinUserId = '64772d4207f2d41ce2062496'
   const handleLikePerson = (likePersonUserId) => {
-    fetch(API_URL(`/likedPersons/${userId}`), {
+    fetch(API_URL(`/likedPersons`), {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -161,13 +163,13 @@ export const Dashboard = () => {
           </p>
           <h1>{`${currentUser.username}'s Profile`}</h1>
           <p>{`role: ${currentUser.role}`}</p>
+         
         </div>
         {loading ? 'loading...' : <div><h1>Get list of mentors/mentees here</h1>{matchingList
           .filter((user) => !likedUsers.includes(user.id) && !dislikedUsers.includes(user.id))
           .map((user) =>
             <TinderCard
-              key={user.username} onSwipe={(dir) => swiped(dir, user.username)} onCardLeftScreen={() => outOfFrame(user.username)} /* preventSwipe={['right', 'left']} */
-            >
+              key={user.username} onSwipe={(dir) => swiped(dir, user.username)} onCardLeftScreen={() => outOfFrame(user.username)} /* preventSwipe={['right', 'left']} */>
           <div className="swipe-container">
             <div className="card-container">
               <div className="kort">
@@ -177,12 +179,13 @@ export const Dashboard = () => {
                   style={{ width: 200, height: 300 }} />
                 <p> Mentor card</p>
                 <p> Picture of person </p>
+                <img src={user.profilePic} alt={`Picture of ${user.username}`}/>
                 <p>{user.username}</p>
                 <p>{user.role}</p>
                 <p> preferences: </p>
                 <p> info about our selfs </p>
                 <p> Emojis to show extra </p>
-                {/* {user.preferences.map((pref) => <p>{pref}</p>)} */}
+                {user.preferences.map((pref) => <p>{pref}</p>)}
               </div>
                   <button type="button" onClick={() => handleLikePerson(user.id)}>
                     Accept

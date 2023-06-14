@@ -443,9 +443,6 @@ select {
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
 .picture-container{
   display: flex;
   justify-content: center;

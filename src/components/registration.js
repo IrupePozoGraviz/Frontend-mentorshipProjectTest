@@ -20,7 +20,7 @@ export const RegistrationPage = () => {
     if (registrationSuccess) {
       // Redirect to the profile page after successful registration
       setTimeout(() => {
-        navigate('/profile');
+        navigate('/dashboard');
       }, 2000);
     }
   }, [registrationSuccess, navigate]);

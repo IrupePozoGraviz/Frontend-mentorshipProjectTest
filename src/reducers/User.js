@@ -6,6 +6,7 @@ const user = createSlice({
     username: null,
     email: '', // Initialize with an empty string
     firstName: '', // Initialize with an empty string
+    lastName: '', // Initialize with an empty string
     role: '', // Initialize with an empty string
     preferences: '', // Initialize with an empty string
     accessToken: null,
@@ -24,6 +25,9 @@ const user = createSlice({
     },
     setFirstName: (store, action) => {
       store.firstName = action.payload;
+    },
+    setLastName: (store, action) => {
+      store.lastName = action.payload;
     },
     setRole: (store, action) => {
       store.role = action.payload;
@@ -55,6 +59,7 @@ export const {
   setUsername,
   setEmail,
   setFirstName,
+  setLastName,
   setRole,
   setPreferences,
   setAccessToken,
