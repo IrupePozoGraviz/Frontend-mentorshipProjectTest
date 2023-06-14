@@ -98,49 +98,51 @@ export const EditProfilePage = () => {
   };
 
   return (
-    <div>
+    <div className="edit-container">
       <h2>Edit Profile</h2>
-      <Picture />
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="firstName">First Name:</label>
-          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="lastName">Last Name:</label>
-          <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        </div>
-        <div>
-          <label>Role:</label>
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="">Select role</option>
-            <option value="mentor">Mentor</option>
-            <option value="mentee">Mentee</option>
-          </select>
-        </div>
-        <div>
-          <label>Preferences:</label>
-          <select multiple value={preferences} onChange={handlePreferenceChange}>
-            <option value="fullstack">Full Stack</option>
-            <option value="frontend">Frontend</option>
-            <option value="backend">Backend</option>
-            {/* Add other preference options here */}
-          </select>
-        </div>
-        <button type="submit">Save</button>
-      </form>
+      <Picture className="photo-container" />
+      <section className="form-container">
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor="username">Username:</label>
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="password">Password:</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="email">Email:</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="firstName">First Name:</label>
+            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="lastName">Last Name:</label>
+            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+          </div>
+          <div className="multiple-input-container">
+            <label>Role:</label>
+            <select value={role} onChange={(e) => setRole(e.target.value)}>
+              <option value="">Select role</option>
+              <option value="mentor">Mentor</option>
+              <option value="mentee">Mentee</option>
+            </select>
+          </div>
+          <div className="multiple-input-container">
+            <label>Preferences:</label>
+            <select multiple value={preferences} onChange={handlePreferenceChange}>
+              <option value="fullstack">Full Stack</option>
+              <option value="frontend">Frontend</option>
+              <option value="backend">Backend</option>
+              {/* Add other preference options here */}
+            </select>
+          </div>
+          <button type="submit">Save</button>
+        </form>
+      </section>
       <button type="submit" onClick={handleDeleteProfile}>Delete Profile</button>
     </div>
   );

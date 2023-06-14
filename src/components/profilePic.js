@@ -94,12 +94,14 @@ export const Picture = () => {
   };
 
   return (
-    <div>
+    <div className="photo-container">
       <h2>Profile Picture</h2>
-      {profilePicture && <img src={profilePicture} alt="Profile" style={{ width: 200, height: 300 }} />}
+      {profilePicture && <img src={profilePicture} alt="Profile" />}
       <input type="file" onChange={handleFileChange} />
-      <button type="submit" onClick={uploadProfilePic}>Upload Picture</button>
-      <button type="submit" onClick={deleteProfilePic}>Delete Picture</button>
+      <button className="uppload" type="submit" onClick={uploadProfilePic}>Upload Picture</button>
+      <button className="delete" type="submit" onClick={deleteProfilePic}>Delete Picture</button>
+
     </div>
   );
 };
+
