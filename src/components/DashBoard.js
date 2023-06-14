@@ -150,7 +150,7 @@ export const Dashboard = () => {
         </div>
         {loading ? 'loading...' : <div><h1>Get list of mentors/mentees here</h1>{matchingList.map((user) => <TinderCard key={user.username} onSwipe={(dir) => swiped(dir, user.username)} onCardLeftScreen={() => outOfFrame(user.username)} /* preventSwipe={['right', 'left']} */>
           <div className="swipe-container">
-            <div className="card-container">
+            <div className="card-containers">
               <div className="kort">
                 <img
                   src="https://placebear.com/200/300"
