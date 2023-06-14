@@ -24,7 +24,8 @@ export const Dashboard = () => {
   const [lastDirection, setLastDirection] = useState(null);
 
   const userId = useSelector((store) => store.user.userId);
-  const accessToken = useSelector((store) => store.user.accessToken);
+  let accessToken = useSelector((store) => store.user.accessToken);
+  accessToken = !accessToken && localStorage.getItem('accessToken');
   const currentUser = useSelector((store) => store.user);
   /* const userPreferences = useSelector((store) => store.user.preferences); */
 

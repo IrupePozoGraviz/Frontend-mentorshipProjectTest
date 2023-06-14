@@ -10,7 +10,8 @@ import BioEditor from './biography';
 
 export const ProfilePage = () => {
   const [loading, setLoading] = useState(false);
-  const accessToken = useSelector((store) => store.user.accessToken);
+  let accessToken = useSelector((store) => store.user.accessToken);
+  accessToken = !accessToken && localStorage.getItem('accessToken');
   const userId = useSelector((store) => store.user.userId);
   const dispatch = useDispatch();
   const userProfile = useSelector((store) => store.user);

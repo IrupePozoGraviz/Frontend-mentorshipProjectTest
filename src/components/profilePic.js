@@ -13,7 +13,8 @@ export const Picture = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const userId = useSelector((store) => store.user.userId);
-  const accessToken = useSelector((store) => store.user.accessToken);
+  let accessToken = useSelector((store) => store.user.accessToken);
+  accessToken = !accessToken && localStorage.getItem('accessToken');
 
   useEffect(() => {
     const fetchProfilePic = async () => {
@@ -43,6 +44,8 @@ export const Picture = () => {
     fetchProfilePic();
   }, [userId, accessToken]);
 
+  /*  useEffect(() => { console.log(profilePicture) }, [profilePicture]) */
+
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
@@ -62,8 +65,9 @@ export const Picture = () => {
       const response = await fetch(API_URL('user/647edebae2a9928a0dcf623d/upload-profile-picture'), options);
       if (response.ok) {
         console.log('Profile picture uploaded successfully!');
+        setProfilePicture(URL.createObjectURL(selectedFile));
       } else {
-        console.log('Failed to upload profile picture:', response.status);
+        console.log('Failed to upload profile picture:');
       }
     } catch (error) {
       console.log('Error uploading profile picture:', error);
