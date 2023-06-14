@@ -22,6 +22,10 @@ export const Dashboard = () => {
   const [matchingList, setMatchingList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [lastDirection, setLastDirection] = useState(null);
+  /*  FOR THE BUTTONS */
+  const [likedUsers, setLikedUsers] = useState([]);
+  const [dislikedUsers, setDislikedUsers] = useState([]);
+
 
   const userId = useSelector((store) => store.user.userId);
   let accessToken = useSelector((store) => store.user.accessToken);
@@ -49,7 +53,10 @@ export const Dashboard = () => {
         if (data.success) {
           console.log(data.response)
 
-          // här ska vi spara users i en state variable
+          // add users in a state variable
+          setMatchingList(data.response.users)
+          console.log(matchingList)
+
 
           // om användaren är mentor, vill vi bara spara mentees
           if (currentUser.role === 'mentor') {
@@ -91,9 +98,13 @@ export const Dashboard = () => {
     console.log('removing: ' + likePersonUserId)
     if (direction === 'right') {
       handleLikePerson(likePersonUserId)
+    } else if (direction === 'left') {
+      setDislikedUsers([...dislikedUsers, likePersonUserId])
+      setLastDirection(direction)
     }
     setLastDirection(direction)
   }
+
   const outOfFrame = (likePersonUserId) => {
     console.log(likePersonUserId + ' left the screen!')
   }
@@ -113,16 +124,19 @@ export const Dashboard = () => {
       .then((res) => res.json())
       .then((json) => {
         if (json.success) {
-          // om ni vill navigera
+          setLikedUsers([...likedUsers, likePersonUserId]);
         } else {
-          console.error('Failed to save liked person')
+          console.error('Failed to save liked person');
         }
       })
       .catch((error) => {
-        console.error('Failed to save liked Person', error)
-      })
-  }
+        console.error('Failed to save liked Person', error);
+      });
+  };
 
+  <button type="button" onClick={() => setDislikedUsers([...dislikedUsers, user.id])}>
+    Decline
+  </button>
 
 
   return (
@@ -140,7 +154,12 @@ export const Dashboard = () => {
           <h1>{`${currentUser.username}'s Profile`}</h1>
           <p>{`role: ${currentUser.role}`}</p>
         </div>
-        {loading ? 'loading...' : <div><h1>Get list of mentors/mentees here</h1>{matchingList.map((user) => <TinderCard key={user.username} onSwipe={(dir) => swiped(dir, user.username)} onCardLeftScreen={() => outOfFrame(user.username)} /* preventSwipe={['right', 'left']} */>
+        {loading ? 'loading...' : <div><h1>Get list of mentors/mentees here</h1>{matchingList
+          .filter((user) => !likedUsers.includes(user.id) && !dislikedUsers.includes(user.id))
+          .map((user) =>
+            <TinderCard
+              key={user.username} onSwipe={(dir) => swiped(dir, user.username)} onCardLeftScreen={() => outOfFrame(user.username)} /* preventSwipe={['right', 'left']} */
+            >
           <div className="swipe-container">
             <div className="card-container">
               <div className="kort">
@@ -157,14 +176,12 @@ export const Dashboard = () => {
                 <p> Emojis to show extra </p>
                 {/* {user.preferences.map((pref) => <p>{pref}</p>)} */}
               </div>
-              <button
-                type="button"
-                onClick={() => handleLikePerson(user.id)}>Accept
-              </button>
-              <button
-                type="submit">
-                Decline
-              </button>
+                  <button type="button" onClick={() => handleLikePerson(user.id)}>
+                    Accept
+                  </button>
+                  <button type="button" onClick={() => setDislikedUsers([...dislikedUsers, user.id])}>
+                    Decline
+                  </button>
             </div>
           </div>
         </TinderCard>
