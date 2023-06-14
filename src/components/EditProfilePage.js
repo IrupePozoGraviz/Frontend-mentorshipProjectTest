@@ -26,6 +26,8 @@ export const EditProfilePage = () => {
   const userId = useSelector((store) => store.user.userId);
   let accessToken = useSelector((store) => store.user.accessToken);
   accessToken = !accessToken && localStorage.getItem('accessToken');
+  console.log('accessToken', accessToken)
+  console.log('userId', userId)
   const handlePreferenceChange = (e) => {
     const selectedPreferences = Array.from(e.target.selectedOptions, (option) => option.value);
     setPreferences(selectedPreferences);
