@@ -117,15 +117,17 @@ export const Dashboard = () => {
 
 // make a onclick event that for a "like-button" that triggers a function that adds the user to the matchlist in the database by sending a PUT/PATCH request to the backend that updates the matchlist for the user in the database (in an array in the database) like this:
 // make a onclick event that for a "dislike-button" that triggers a function that adds the user to the matchlist in the database by sending a PUT/PATCH request to the backend that updates the matchlist for the user in the database (in an array in the database)
-/* const handleLikePerson = () => {
-  fetch(API_URL(`user/${userId}`), {
+const fakeLoggedinUserId = '64772d4207f2d41ce2062496'
+
+const handleLikePerson = (userId) => {
+  fetch(API_URL(`/likedPersons/${fakeLoggedinUserId}`), {
     method: 'PATCH',
     headers: {
-      'Content-Type': 'application/json',
-      Authorization: accessToken
+      'Content-Type': 'application/json'
+      // Authorization: accessToken
     },
     body: JSON.stringify({
-      likePersons: { userId }
+      likedUserId: userId
     })
   })
     .then((res) => res.json())
@@ -139,7 +141,7 @@ export const Dashboard = () => {
     .catch((error) => {
       console.error('Failed to save liked Person', error)
     })
-} */
+}
 // style det här! // behvöer en like knapp som skickar med user-id för det kortet som triggar en PUT/PATCH i backendet som uppdaterar matchen i databasen för den användaren och lägger till den i matchlistan för den användaren (i en array i databasen)
 // behöver en dislike knapp som triggar en PUT/PATCH i backendet som uppdaterar matchen i databasen för den användaren och lägger till den i matchlistan för den användaren (i en array i databasen)
 
@@ -163,7 +165,8 @@ const UserCard = ({ user }) => {
           {/* {user.preferences.map((pref) => <p>{pref}</p>)} */}
         </div>
         <button
-          type="submit">Accept
+          type="button"
+          onClick={() => handleLikePerson(user.id)}>Accept
         </button>
         <button
           type="submit">
