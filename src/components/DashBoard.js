@@ -21,6 +21,8 @@ import { setError } from '../reducers/User';
 export const Dashboard = () => {
   const [matchingList, setMatchingList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [lastDirection, setLastDirection] = useState(null);
+
   const userId = useSelector((store) => store.user.userId);
   const accessToken = useSelector((store) => store.user.accessToken);
   const currentUser = useSelector((store) => store.user);
@@ -93,6 +95,16 @@ export const Dashboard = () => {
   const onCardLeftScreen = (myIdentifier) => {
     console.log(`${myIdentifier}  left the screen`)
   }
+  const swiped = (direction, likePersonUserId) => {
+    console.log('removing: ' + likePersonUserId)
+    if (direction === 'right') {
+      handleLikePerson(likePersonUserId)
+    }
+    setLastDirection(direction)
+  }
+  const outOfFrame = (likePersonUserId) => {
+    console.log(likePersonUserId + ' left the screen!')
+  }
 
   // const fakeLoggedinUserId = '64772d4207f2d41ce2062496'
   const handleLikePerson = (likePersonUserId) => {
@@ -119,6 +131,8 @@ export const Dashboard = () => {
       })
   }
 
+
+
   return (
     <main className="dashboard">
 
@@ -134,7 +148,7 @@ export const Dashboard = () => {
           <h1>{`${currentUser.username}'s Profile`}</h1>
           <p>{`role: ${currentUser.role}`}</p>
         </div>
-        {loading ? 'loading...' : <div><h1>Get list of mentors/mentees here</h1>{matchingList.map((user) => <TinderCard onSwipe={onSwipe} onCardLeftScreen={() => onCardLeftScreen('fooBar')} preventSwipe={['right', 'left']}>
+        {loading ? 'loading...' : <div><h1>Get list of mentors/mentees here</h1>{matchingList.map((user) => <TinderCard key={user.username} onSwipe={(dir) => swiped(dir, user.username)} onCardLeftScreen={() => outOfFrame(user.username)} /* preventSwipe={['right', 'left']} */>
           <div className="swipe-container">
             <div className="card-container">
               <div className="kort">
@@ -161,8 +175,10 @@ export const Dashboard = () => {
               </button>
             </div>
           </div>
-        </TinderCard>)}
+        </TinderCard>
+        )}
         </div>}
+        {lastDirection ? <h2 className='infoText'>You swiped {lastDirection}</h2> : <h2 className='infoText' />}
       </div>
 
     </main>
