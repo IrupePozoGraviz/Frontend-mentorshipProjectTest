@@ -7,13 +7,14 @@ import { NavBar } from './LogedInNav';
 
 export const UserCard = () => {
   /* const [users, setUsers] = useState([...mentors, ...mentees]); */
+  const [matchingList, setMatchingList] = useState([]);
   const [lastDirection, setLastDirection] = useState(null);
   const [likedUsers, setLikedUsers] = useState([]);
   const [dislikedUsers, setDislikedUsers] = useState([]);
 
   /* const [loading, setLoading] = useState(true); */
   const mentorsData = mentors[0]; // Assuming you want to use the first mentor from the mentors array
-  const menteesData = mentees[0]; // Assuming you want to use the first mentee from the mentees array
+  const menteesData = mentees[0]; // Assuming you want to use the first mentee from the mentees array. if i want to use all mentees, i need to use map() to loop through the mentees array and return a TinderCard component for each mentee.
 
   // Function to handle swiping action
   const swiped = (direction, userId) => {
