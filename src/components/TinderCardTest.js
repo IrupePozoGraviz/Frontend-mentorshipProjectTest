@@ -36,40 +36,43 @@ export const UserCard = () => {
   const menteesData = mentees[currentMenteeIndex];
 
   return (
+
     <div className="">
       <NavBar />
-      <div className="">
-        <h1>Lizzos Profile </h1>
-        <div className="">
-          <p>Role: Mentor</p>
+      <div className="person-card">
+        <div className="profile-header">
+          <div className="Lizzo">
+            <p className="loged-in-name">Lizzo</p>
+            <p className="role-mentor">Mentor | </p>
+          </div>
+          <p className="loged-in-text">  | logged in</p>
         </div>
-        <div className="tinderkortet">
-          <img className="profile-image" src={menteesData.image} alt="mentee" />
-          <div className="Text">
-            <h3>{menteesData.userName}</h3>
-            <p>{menteesData.pronoun}</p>
-            <p>{menteesData.firstName}</p>
-            <p>{menteesData.role}</p>
-            <p>{menteesData.bio}</p>
-            <p>{menteesData.preferences}</p>
-            <p>{menteesData.emoji}</p>
-          </div>
-          <div className="button-containers">
-            <button
-              className="accept-buttons"
-              type="button"
-              onClick={() => handleLikePerson(menteesData.id)}>
-            Accept
-            </button>
-            <button
-              className="decline-buttons"
-              type="button"
-              onClick={() => handleDislikePerson(menteesData.id)}>
-            Decline
-            </button>
-          </div>
+
+        <div className="photo-container">
+          <img src={menteesData.image} alt="mentee" />
+        </div>
+        <div className="profile-info">
+          <h3>{menteesData.firstName} {menteesData.lastName} {menteesData.emoji}</h3>
+          <p>{menteesData.pronoun} / / {menteesData.role}</p>
+          <p>{menteesData.bio}</p>
+          <p>{menteesData.preferences}</p>
         </div>
       </div>
+      <div className="button-container">
+        <button
+          className="primary-button"
+          type="button"
+          onClick={() => handleLikePerson(menteesData.id)}>
+            Accept
+        </button>
+        <button
+          className="primary-button"
+          type="button"
+          onClick={() => handleDislikePerson(menteesData.id)}>
+            Decline
+        </button>
+      </div>
     </div>
+
   );
 };

@@ -28,11 +28,11 @@ h2 {
   padding: 12px 30px;
   border-radius: 30px;
   border: none;
-} */
+} 
 
 .primary-button:hover {
   background: linear-gradient(260deg, rgb(254, 48, 114), rgb(255, 89, 64));
-} */
+} 
 
 .secondary-button {
   color: rgb(121, 119, 119);
@@ -57,9 +57,10 @@ nav {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center; /* Align items vertically */
 }
 
-nav .nav-button {
+.nav-button {
   color: rgb(254, 48, 114);
   background-color: rgb(255, 255, 255);
   font-size: 20px;
@@ -69,10 +70,11 @@ nav .nav-button {
   margin: 10px;
 }
 
-nav .nav-button:disabled {
+.nav-button:disabled {
   background-color: rgb(181, 180, 180);
   color: rgb(189, 42, 90);
 }
+
 
 nav .logo-container {
   width: 170px;
@@ -84,11 +86,41 @@ nav .logo-container .logo {
 }
 
 /*-------- LogedIn NavBar --------*/
+.logged-in-nav {
+  background-color: #f2f2f2;
+  padding: 10px;
+  justify-content: center;
+  padding: 20px;
+}
 
-li {
-  list-style: none;
-} 
+.navbar-list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+ 
+}
 
+.navbar-item {
+  margin-right: 10px;
+}
+
+.navbar-item:last-child {
+  margin-right: 0;
+}
+
+.navbar-item a {
+  text-decoration: none;
+    color: rgb(254, 48, 114);
+      background-color: rgb(255, 255, 255);
+
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.navbar-item a:hover {
+  background-color: #ddd;
+}
 
 
 /*-------- Home page --------*/
@@ -358,6 +390,7 @@ margin: 10px;
   align-items: center;
   padding: 20px;
 }
+.chat-container
 .profile-header img{
   border: solid 5px black;
   width: 200px;
@@ -373,10 +406,7 @@ margin: 10px;
 .profile-info{
   background: linear-gradient(to bottom, rgb(247, 244, 244) 0%, 
   rgb(220, 219, 219) 100%);
- 
 
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   padding: 20px;
 }
 .matches-section{
@@ -449,54 +479,6 @@ select {
   cursor: pointer;
 }
 
-.picture-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.picture-container img{
-  display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 0px;
-
-position: relative;
-width: 20%;
-background: rgba(255, 255, 255, 0.6);
-border: 1px solid #FFFFFF;
-border-radius: 50%;
-backdrop-filter: blur(50px);}
-
-
-/*-------- Photo Container --------*/
-/*
-.photo-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.photo-container img{
-  display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-padding: 0px;
-
-position: relative;
-width: 350px;
-height: 400px;
-
-background: rgba(255, 255, 255, 0.6);
-border: 1px solid #FFFFFF;
-backdrop-filter: blur(50px);
-/* Note: backdrop-filter has minimal browser support 
-border-radius: 20px;
-}
 input[type="file"] {
   display: flex;
   flex-direction: column;
@@ -536,28 +518,77 @@ box-shadow: 3px 4px 2px -2px rgba(0, 0, 0, 0.32);
 border-radius: 18.5px;
 }
 
-*/
 
 /*-------- mockup --------*/
-.bajs{
-padding: 0px;
-width: 100%;
-left: 0px;
-right: 0px;
-top: 0px;
-background: pink;
-box-shadow: 20px 20px 25px 20px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
-border-radius: 29px;}
-
-.profile-image{
-/* margin: 10px; */
-  /* padding: 2px; */
-  /* width: auto; */
-  max-height: 300px;
-  /* background: rgba(255, 255, 255, 0.6); */
-  border: 1px solid #FFFFFF;
+/*-------- Photo Container --------*/
+.person-card {
+  margin: 20px 30px;
+  border : solid 5px pink;
   border-radius: 20px;
-  /* backdrop-filter: blur(50px); */
-  -webkit-backdrop-filter: blur(50px);
-  border: 5px solid rgba(235, 16, 16, 0.18);
+}
+.photo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background: linear-gradient(to bottom, rgb(247, 244, 244) 0%,
+        rgb(220, 219, 219) 100%);
+}
+
+.photo-container img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+
+  position: relative;
+  width: 350px;
+  height: 400px;
+
+  background: linear-gradient(to bottom, rgb(247, 244, 244) 0%,
+        rgb(220, 219, 219) 100%);
+  border: 1px solid #FFFFFF;
+  backdrop-filter: blur(50px);
+  border-radius: 20px;
+}
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  padding: 20px;
+}
+.Lizzo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.loged-in-text {
+  color: lightblue;
+}
+
+.loged-in-text {
+  align-self: flex-end;
+}
+.demo-link {
+
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #470b70;
+  color: #ffffff;
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  box-shadow: #ffffff 0px 0px 0px 2px inset, #ffffff 0px 0px 0px 1px;
+}
+
+.demo-link:hover {
+  background-color: #ed0e0e;
+  color: aqua;
 }

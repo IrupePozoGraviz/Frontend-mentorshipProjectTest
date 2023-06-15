@@ -3,20 +3,20 @@ import React from 'react';
 
 export const NavBar = () => {
   return (
-    <nav>
-      <ul>
-        <li>
+    <nav className="logged-in-nav">
+      <ul className="navbar-list">
+        <li className="navbar-item">
           <Link to="/">Home</Link>
         </li>
-        <Link to="/">Log Out</Link>
-        <li>
+
+        <li className="navbar-item">
           <Link to="/dashboard">My Dashboard</Link>
         </li>
-        <li>
+        <li className="navbar-item">
           <Link to="/edit">Edit Profile</Link>
         </li>
-        <li>
-          <Link to="/picture">Picture</Link>
+        <li className="navbar-item">
+          <Link to="/">Log Out</Link>
         </li>
       </ul>
     </nav>
