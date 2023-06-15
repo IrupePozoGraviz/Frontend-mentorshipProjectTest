@@ -1,6 +1,8 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 import TinderCard from 'react-tinder-card';
 import { mentors, mentees } from './UserData';
+import { NavBar } from './LogedInNav';
 /* import LoginPage from './MockupLogin'; */
 
 export const UserCard = () => {
@@ -10,6 +12,8 @@ export const UserCard = () => {
   const [dislikedUsers, setDislikedUsers] = useState([]);
 
   /* const [loading, setLoading] = useState(true); */
+  const mentorsData = mentors[0]; // Assuming you want to use the first mentor from the mentors array
+  const menteesData = mentees[0]; // Assuming you want to use the first mentee from the mentees array
 
   // Function to handle swiping action
   const swiped = (direction, userId) => {
@@ -33,7 +37,8 @@ export const UserCard = () => {
   }
 
   return (
-    <main className="dashboard">
+    <div className="dashboard">
+      <NavBar />
       <div className="box-container">
         <div className="profile-header">
           <h1>{`${mentors.username}'s Profile`}</h1>
@@ -44,39 +49,67 @@ export const UserCard = () => {
           .map((user) => */}
 
         <TinderCard
-          key={mentors.username}
-          onSwipe={(dir) => swiped(dir, mentors.username)}
-          onCardLeftScreen={() => outOfFrame(mentors.username)}>
+          key={mentorsData.id} // key is needed to prevent TinderCard from reusing the same component instance when the list of users changes (e.g. when a user is liked). This is a requirement of the TinderCard component. The key should be unique for each user. And since we have two arrays of users (mentors and mentees), we can use the user's ID as the key. mentorsData.id is the ID of the mentor, and menteesData.id is the ID of the mentee. here we use mentorsData.id, to get id from mentees as well, we need to use menteesData.id in the second TinderCard component below.
+          onSwipe={(dir) => swiped(dir, mentorsData.userName)}
+          onCardLeftScreen={() => outOfFrame(mentorsData.userName)}>
           <div className="swipe-container">
             <div className="card-container">
               <div className="card">
                 <div className="card-image">
-                  <img src={mentors.image} alt="mentor" />
+                  <img src={mentorsData.image} alt="mentor" />
                 </div>
-                <h3>{mentors.name}</h3>
-                <p>{mentors.pronoun}</p>
+                <h3>{mentorsData.userName}s Profile</h3>
+                <p>{mentorsData.pronoun}</p>
 
-                <p>{mentors.username}</p>
-                <p>{mentors.role}</p>
-                <p> {mentors.pronoun} </p>
-                <p> info about ourselves </p>
-                <p> Emojis to show extra </p>
+                <p>{mentorsData.firstName}</p>
+                <p>{mentorsData.role}</p>
+                <p> {mentorsData.bio}</p>
+                <p> {mentorsData.emoji}</p>
                 {/* {mentors.preferences.map((pref) => <p>{pref}</p>)} */}
+
+                <button
+                  className="accept-button" // to be added style to in css
+                  type="button"
+                  onClick={() => handleLikePerson(mentors.id)}>
+                  Accept
+                </button>
+                <button
+                  className="decline-button" // to be added style to in css
+                  type="button"
+                  onClick={() => handleDislikePerson([...dislikedUsers, mentors.id])}>
+                  Decline
+                </button>
               </div>
+
+            </div>
+          </div>
+        </TinderCard>
+        <TinderCard
+          key={menteesData.id}
+          onSwipe={(dir) => swiped(dir, menteesData.userName)}
+          onCardLeftScreen={() => outOfFrame(menteesData.userName)}>
+
+          <div className="swipe-container">
+            <div className="card-container">
               <div className="card">
                 <div className="card-image">
-                  <img src={mentees.image} alt="mentor" />
+                  <img src={menteesData.image} alt="mentor" />
                 </div>
-                <h3>{mentees.name}</h3>
-                <p>{mentees.pronoun}</p>
-
+                <h3>{menteesData.userName}</h3>
+                <p>{menteesData.pronoun}</p>
+                <p>{menteesData.firstName}</p>
+                <p>{menteesData.role}</p>
+                <p> {menteesData.bio}</p>
+                <p> {menteesData.emoji}</p>
               </div>
               <button
+                className="accept-button" // to be added style to in css
                 type="button"
                 onClick={() => handleLikePerson(mentors.id)}>
                                 Accept
               </button>
               <button
+                className="decline-button" // to be added style to in css
                 type="button"
                 onClick={() => handleDislikePerson([...dislikedUsers, mentors.id])}>
                                 Decline
@@ -86,6 +119,7 @@ export const UserCard = () => {
         </TinderCard>
       </div>
       {lastDirection ? <h2 className="infoText">You swiped {lastDirection}</h2> : <h2 className="infoText"> You rang</h2>}
-    </main>
+
+    </div>
   );
 };

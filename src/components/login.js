@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -43,7 +44,7 @@ const LogIn = ({ setLogIn, isSignUp }) => {
         console.log('Login Data:', data);
         if (data.success) {
           dispatch(user.actions.setUsername(data.response.username));
-          dispatch(user.actions.setUserId(data.response.id));
+          dispatch(user.actions.setUserId(data.response._id));
           dispatch(user.actions.setRole(data.response.role));
           dispatch(user.actions.setFirstName(data.response.firstName));
           dispatch(user.actions.setLastName(data.response.lastName));

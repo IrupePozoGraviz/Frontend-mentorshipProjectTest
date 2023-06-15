@@ -18,6 +18,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import TinderCard from 'react-tinder-card'
 import { API_URL } from './Utils';
 import { setError } from '../reducers/User';
+import { NavBar } from './LogedInNav';
+
 
 
 
@@ -151,11 +153,13 @@ export const Dashboard = () => {
 
   return (
     <main className="dashboard">
+      <NavBar />
 
       <div key={userId} className="box-container">
 
         <div className="profile-header">
           <h2>Dashboard</h2>
+    
           <p> Dashboard/landnindssida typ: liked persons should be displayed for user in a
             page together with more info Landningssida, där det typ står hej
             mentor/mentee du har 100 mentorer väntande börja välj(decide on which component!).

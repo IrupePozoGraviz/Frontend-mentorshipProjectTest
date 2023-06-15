@@ -12,6 +12,7 @@ import { Dashboard } from './components/DashBoard';
 import { EditProfilePage } from './components/EditProfilePage';
 import { Picture } from './components/profilePic'
 import Home from './pages/Home';
+import { UserCard } from './components/TinderCardTest';
 
 export const App = () => {
   const reducer = combineReducers({
@@ -25,6 +26,7 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/tinder-cards" element={<UserCard />} />
           {/* <Route path="/tinder-cards" element={<TinderCards />} /> */}
           <Route path="/dashboard" element={<Dashboard />} />
           {/*     <Route path="/tinder-cards" element={<TinderCards />} /> */}

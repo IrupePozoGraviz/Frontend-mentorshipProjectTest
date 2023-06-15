@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from './Utils';
 import { Picture } from './profilePic';
-import Aretha from '../images/aretha.jpeg';
+import { NavBar } from './LogedInNav';
 
 export const EditProfilePage = () => {
   const navigate = useNavigate();
@@ -92,7 +92,8 @@ export const EditProfilePage = () => {
   };
 
   return (
-    <div className="edit-container">
+    <>
+      <NavBar /><div className="edit-container">
       <h2>Edit Profile</h2>
       <Picture className="picture-container" />
       <section className="form-container">
@@ -138,6 +139,6 @@ export const EditProfilePage = () => {
         </form>
       </section>
       <button className="btnEdit" type="submit" onClick={handleDeleteProfile}>Delete Profile</button>
-    </div>
+    </div></>
   );
 };

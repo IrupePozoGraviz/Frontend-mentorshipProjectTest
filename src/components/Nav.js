@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import TeQueenMatchLogo from '../images/TeQueenMatchLogo.png';
 import MentorLogo from '../images/MentorLogo.png';
 
@@ -18,6 +19,9 @@ const Nav = ({ authToken, minimal, setLogIn, Login, setIsSignUp }) => {
           className="logo"
           src={minimal ? MentorLogo : TeQueenMatchLogo} // means if minimal is true, show colorLogo, else show whiteLogo
           alt="logo" />
+      </div>
+      <div className="demo-link">
+        <Link to="/tinder-cards">LINK TO DEMO-DASHBOARD</Link>
       </div>
       {!authToken && !minimal && ( // only show the login button if we're not logged in and we're not on the minimal page
         <button

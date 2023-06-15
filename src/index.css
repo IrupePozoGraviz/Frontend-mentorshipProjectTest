@@ -44,14 +44,14 @@ h2 {
   border-radius: 30px;
   border: solid 2px rgb(121, 119, 119);
   margin: 6px;
-} */
+} 
 
 .secondary-button:hover {
   color: rgb(48, 48, 48);
   border: solid 2px rgb(48, 48, 48);
 }
 
-/*-------- Navbar --------*/
+/*-------- Navbar STARTPAGE--------*/
 
 nav {
   width: 100%;
@@ -82,6 +82,14 @@ nav .logo-container {
 nav .logo-container .logo {
   width: 100%;
 }
+
+/*-------- LogedIn NavBar --------*/
+
+li {
+  list-style: none;
+} 
+
+
 
 /*-------- Home page --------*/
 .overlay {
