@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+import user from '../reducers/User';
 import { API_URL } from './Utils'
 
 export const RegistrationPage = () => {
@@ -16,15 +17,14 @@ export const RegistrationPage = () => {
   const [lastName, setLastName] = useState('');
   const [role, setRole] = useState('');
   const [preferences, setPreferences] = useState([]);
-  const [registrationSuccess] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (registrationSuccess) {
       // Redirect to the profile page after successful registration
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 2000);
+
+      navigate('/dashboard');
     }
   }, [registrationSuccess, navigate]);
 
@@ -37,7 +37,7 @@ export const RegistrationPage = () => {
     e.preventDefault(); */
 
   // Create a user object with the form data
-  const user = {
+  const newUser = {
     username,
     password,
     email,
@@ -57,14 +57,14 @@ export const RegistrationPage = () => {
         Authorization: `Bearer ${localStorage.getItem('accessToken')}`
         // Include the access token in the request headers
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(newUser)
     };
     fetch(API_URL('register'), options)
       .then((response) => response.json())
       .then((data) => {
         console.log('Register Data:', data)
 
-        console.log('Login Data:', data);
+        console.log('Register Data:', data);
         if (data.success) {
           dispatch(user.actions.setUsername(data.response.username));
           dispatch(user.actions.setUserId(data.response._id));
@@ -75,6 +75,7 @@ export const RegistrationPage = () => {
           dispatch(user.actions.setPreferences(data.response.preferences));
           dispatch(user.actions.setError(null));
           dispatch(user.actions.setAccessToken(data.response.accessToken));
+          setRegistrationSuccess(true);
         } else {
           dispatch(user.actions.setAccessToken(null));
           dispatch(user.actions.setUsername(null));
