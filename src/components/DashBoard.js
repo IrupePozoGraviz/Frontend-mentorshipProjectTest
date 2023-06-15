@@ -21,8 +21,6 @@ import { setError } from '../reducers/User';
 import { NavBar } from './LogedInNav';
 
 
-
-
 export const Dashboard = () => {
   const [matchingList, setMatchingList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -169,7 +167,8 @@ export const Dashboard = () => {
           <p>{`role: ${currentUser.role}`}</p>
          
         </div>
-        {loading ? 'loading...' : <div><h1>Get list of mentors/mentees here</h1>{matchingList
+        {loading ? 'loading...' : <div>
+          <h1>Get list of mentors/mentees here</h1>{matchingList
           .filter((user) => !likedUsers.includes(user.id) && !dislikedUsers.includes(user.id))
           .map((user) =>
             <TinderCard
