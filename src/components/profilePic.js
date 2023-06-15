@@ -4,7 +4,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react-hooks/exhaustive-deps */
-
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { API_URL } from './Utils';
@@ -12,14 +11,12 @@ import { API_URL } from './Utils';
 export const Picture = () => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [imageUrl, setImageUrl] = useState('');
   const userId = useSelector((store) => store.user.userId);
-  let accessToken = useSelector((store) => store.user.accessToken);
-  accessToken = !accessToken && localStorage.getItem('accessToken');
+  const accessToken = useSelector((store) => store.user.accessToken) || localStorage.getItem('accessToken');
 
   useEffect(() => {
     const fetchProfilePic = async () => {
-      const formData = new FormData();
-      formData.append('profilePicture', selectedFile);
       try {
         const options = {
           method: 'GET',
@@ -44,17 +41,25 @@ export const Picture = () => {
     fetchProfilePic();
   }, [userId, accessToken]);
 
-  /*  useEffect(() => { console.log(profilePicture) }, [profilePicture]) */
-
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
+  };
+
+  const handleUrlChange = (event) => {
+    setImageUrl(event.target.value);
   };
 
   const uploadProfilePic = async () => {
     try {
       const formData = new FormData();
-      formData.append('profilePicture', selectedFile);
-
+      if (selectedFile) {
+        formData.append('profilePicture', selectedFile);
+      } else if (imageUrl) {
+        formData.append('imageUrl', imageUrl);
+      } else {
+        console.log('No file or URL selected for upload.');
+        return;
+      }
       const options = {
         method: 'POST',
         headers: {
@@ -67,7 +72,7 @@ export const Picture = () => {
         console.log('Profile picture uploaded successfully!');
         setProfilePicture(URL.createObjectURL(selectedFile));
       } else {
-        console.log('Failed to upload profile picture:');
+        console.log('Failed to upload profile picture:', response.status);
       }
     } catch (error) {
       console.log('Error uploading profile picture:', error);
@@ -75,15 +80,12 @@ export const Picture = () => {
   };
 
   const deleteProfilePic = async () => {
-    const formData = new FormData();
-    formData.append('profilePicture', selectedFile);
     try {
       const options = {
         method: 'DELETE',
         headers: {
           Authorization: accessToken
-        },
-        body: formData
+        }
       };
       const response = await fetch(API_URL(`user/${userId}/delete-profile-picture`), options);
       if (response.ok) {
@@ -102,10 +104,9 @@ export const Picture = () => {
       <h2>Profile Picture</h2>
       {profilePicture && <img src={profilePicture} alt="Profile" />}
       <input type="file" onChange={handleFileChange} />
-      <button className="uppload" type="submit" onClick={uploadProfilePic}>Upload Picture</button>
+      <input type="text" placeholder="Enter Image URL" value={imageUrl} onChange={handleUrlChange} />
+      <button className="upload" type="submit" onClick={uploadProfilePic}>Upload Picture</button>
       <button className="delete" type="submit" onClick={deleteProfilePic}>Delete Picture</button>
-
     </div>
   );
 };
-
