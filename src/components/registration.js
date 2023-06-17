@@ -36,7 +36,6 @@ export const RegistrationPage = () => {
   /* const handleSubmit = async (e) => {
     e.preventDefault(); */
 
-  // Create a user object with the form data
   const newUser = {
     username,
     password,
@@ -47,7 +46,7 @@ export const RegistrationPage = () => {
     preferences
   };
 
-  // Send a POST request to the backend API
+  // register uses the POST method to send the user object to the API
   const register = (event) => {
     event.preventDefault()
     const options = {

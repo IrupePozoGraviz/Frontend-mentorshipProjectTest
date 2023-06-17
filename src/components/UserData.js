@@ -1,5 +1,6 @@
 // eslint-disable-next-line max-len
 // make an database hardcoded to test the app with data of users with firstname, lastname, role, username, email, preferences, bio, image, likedUsers, dislikedUsers, and matches
+
 export const mentors = [
   {
     id: 1,
@@ -31,7 +32,7 @@ export const mentees = [
     preferences: ['frontend', 'JavaScript', 'react'],
     bio: 'Transition from artistic schemes to coding dreams. Lets leave the cons in the past and embark on a tech journey thats legit, innovative, and scam-free? Ready to build a new empire.',
     emoji: '🇺🇸 🏝️ ',
-    image: 'https://img.jagrantv.com/article/rc1027915/1644906224-anna-sorokin.jpg',
+    image: 'https://static01.nyt.com/images/2022/02/17/fashion/14SOROKIN1/14SOROKIN1-jumbo.jpg?quality=75&auto=webp',
     likedUsers: [1, 3, 4],
     dislikedUsers: [5, 6, 7],
     matches: [8, 9, 10]

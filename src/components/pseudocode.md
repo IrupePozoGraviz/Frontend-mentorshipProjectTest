@@ -8,3 +8,4 @@
 7. User ska ha möjlighet att "un-lajka" matchningar som redan skett. 
 8. User ska ha möjilghet att radera sitt konto. 
 9. User ska ha möjlighet att logga ut och logga in som användare. 
+schemas with möjlighet att spara tidpunkt för en händelse, t

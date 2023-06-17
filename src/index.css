@@ -133,8 +133,11 @@ nav .logo-container .logo {
       rgba(0, 0, 0, 0) 100%)/* , url('images/6e9794bcedeecf5a8f8f41338a2a7345.webp') */
 }
 
-.home {
-  margin-top: 30vh;
+.home img{
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 50%;
 }
 
 /*-------- Login --------*/

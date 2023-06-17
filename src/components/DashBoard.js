@@ -19,6 +19,7 @@ import TinderCard from 'react-tinder-card'
 import { API_URL } from './Utils';
 import { setError } from '../reducers/User';
 import { NavBar } from './LogedInNav';
+import TeQueenMatchnoText from '../images/TeQueenMatchnoText.png';
 
 
 export const Dashboard = () => {
@@ -60,7 +61,7 @@ export const Dashboard = () => {
         if (data.success) {
           console.log(data.response)
 
-          // add users in a state variable
+          // add users in a state variable to be able to swipe through them
           setMatchingList(data.response.users)
           console.log(matchingList)
 
@@ -68,7 +69,7 @@ export const Dashboard = () => {
           // om användaren är mentor, vill vi bara spara mentees
           if (currentUser.role === 'mentor') {
             // då vill vi ha mentees
-            const mentees = data.response.users.filter((user) => user.role === 'mentee')
+            const mentees = data.response.users.filter((user) => user.role === 'mentee') 
 
             setMatchingList(mentees)
           } else {
@@ -150,25 +151,18 @@ export const Dashboard = () => {
 
 
   return (
-    <main className="dashboard">
+    <div className="nav">
       <NavBar />
-
+    <main className="dashboard">
       <div key={userId} className="box-container">
 
         <div className="profile-header">
-          <h2>Dashboard</h2>
-    
-          <p> Dashboard/landnindssida typ: liked persons should be displayed for user in a
-            page together with more info Landningssida, där det typ står hej
-            mentor/mentee du har 100 mentorer väntande börja välj(decide on which component!).
-            Här finns en icon som vid klick tar användaren till "cards-att likea"-sidan.
-          </p>
-          <h1>{`${currentUser.username}'s Profile`}</h1>
+          <h1>{`Welcome ${currentUser.username} `}</h1>
           <p>{`role: ${currentUser.role}`}</p>
          
         </div>
         {loading ? 'loading...' : <div>
-          <h1>Get list of mentors/mentees here</h1>{matchingList
+          <p>Here are your matched Mentors/Mentees</p>{matchingList
           .filter((user) => !likedUsers.includes(user.id) && !dislikedUsers.includes(user.id))
           .map((user) =>
             <TinderCard
@@ -177,18 +171,17 @@ export const Dashboard = () => {
             <div className="card-container">
               <div className="kort">
                 <img
-                  src="https://placebear.com/200/300"
+                  src={TeQueenMatchnoText}
                   alt="Profile"
-                  style={{ width: 200, height: 300 }} />
-                <p> Mentor card</p>
-                <p> Picture of person </p>
+                  style={{ width: 300, height: 300 }} />
                 <img src={user.profilePic} alt={`Picture of ${user.username}`}/>
                 <p>{user.username}</p>
                 <p>{user.role}</p>
                 <p> preferences: </p>
+                {user.preferences.map((pref) => <p>{pref}</p>)}
                 <p> info about our selfs </p>
                 <p> Emojis to show extra </p>
-                {user.preferences.map((pref) => <p>{pref}</p>)}
+                
               </div>
                   <button type="button" onClick={() => handleLikePerson(user.id)}>
                     Accept
@@ -205,5 +198,6 @@ export const Dashboard = () => {
       </div>
 
     </main>
+    </div>
   );
 };
