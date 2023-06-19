@@ -72,12 +72,12 @@ export const Potential = () => {
   }, [dispatch, accessToken, userId]);
 
   /* const swiped = (direction, likePersonUserId) => {
-	if (direction === 'right') {
-	  handleLikePerson(likePersonUserId);
-	} else if (direction === 'left') {
-	  setDislikedUsers(prevDislikedUsers => [...prevDislikedUsers, likePersonUserId]);
-	}
-	setLastDirection(direction);
+  if (direction === 'right') {
+    handleLikePerson(likePersonUserId);
+  } else if (direction === 'left') {
+    setDislikedUsers(prevDislikedUsers => [...prevDislikedUsers, likePersonUserId]);
+  }
+  setLastDirection(direction);
   }; */
   
   //"path": "/likedPersons/:userId",
@@ -136,7 +136,7 @@ export const Potential = () => {
                           <img
                             src={user.profilePic}
                             alt={`Picture of ${user.username}`}/>
-							</div>
+              </div>
 <div className="profile-info"> 
                           <p>{user.username}</p>
                           <p>{user.role}</p>
@@ -148,13 +148,13 @@ export const Potential = () => {
                           <p>Emojis to show extra</p>
                         </div>
                         <button
-						className="primary-button"
+            className="primary-button"
                           type="button"
                           onClick={() => handleLikePerson(user.id)}>
                           Accept
                         </button>
                         <button
-						className="primary-button"
+            className="primary-button"
                           type="button"
                           onClick={() =>
                             setDislikedUsers([...dislikedUsers, user.id])
@@ -176,3 +176,4 @@ export const Potential = () => {
     </div>
   );
 };
+
