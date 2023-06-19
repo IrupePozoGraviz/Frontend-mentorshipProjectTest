@@ -13,6 +13,10 @@ import { EditProfilePage } from './components/EditProfilePage';
 import { Picture } from './components/profilePic'
 import Home from './pages/Home';
 import { UserCard } from './components/TinderCardTest';
+import { Potential } from './components/potentialmatches';
+import { Matched } from './components/matched';
+import { Liked } from './components/liked';
+import { Disliked } from './components/disliked';
 
 export const App = () => {
   const reducer = combineReducers({
@@ -32,6 +36,10 @@ export const App = () => {
           {/*     <Route path="/tinder-cards" element={<TinderCards />} /> */}
           <Route path="/edit" element={<EditProfilePage />} />
           <Route path="/picture" element={<Picture />} />
+          <Route path="/pot" element={<Potential />} />
+          <Route path="/matched" element={<Matched />} />
+          <Route path="/liked" element={<Liked />} />
+          <Route path="/disliked" element={<Disliked />} />
         </Routes>
       </BrowserRouter>
     </Provider>

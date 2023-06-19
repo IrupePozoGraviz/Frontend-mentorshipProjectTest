@@ -16,6 +16,10 @@ export const NavBar = () => {
           <Link to="/edit">Edit Profile</Link>
         </li>
         <li className="navbar-item">
+          <Link to="/pot">Potential matches</Link>
+        </li>
+
+        <li className="navbar-item">
           <Link to="/">Log Out</Link>
         </li>
       </ul>
