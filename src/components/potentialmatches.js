@@ -71,18 +71,19 @@ export const Potential = () => {
     }
   }, [dispatch, accessToken, userId]);
 
-  const swiped = (direction, likePersonUserId) => {
+  /* const swiped = (direction, likePersonUserId) => {
 	if (direction === 'right') {
 	  handleLikePerson(likePersonUserId);
 	} else if (direction === 'left') {
 	  setDislikedUsers(prevDislikedUsers => [...prevDislikedUsers, likePersonUserId]);
 	}
 	setLastDirection(direction);
-  };
+  }; */
   
+  //"path": "/likedPersons/:userId",
 
   const handleLikePerson = (likePersonUserId) => {
-    fetch(API_URL(`/likedPersons`), {
+    fetch(API_URL(`likedPersons/${userId}`), {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
