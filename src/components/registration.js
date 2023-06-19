@@ -33,9 +33,6 @@ export const RegistrationPage = () => {
     setPreferences(selectedPreferences);
   };
 
-  /* const handleSubmit = async (e) => {
-    e.preventDefault(); */
-
   const newUser = {
     username,
     password,
